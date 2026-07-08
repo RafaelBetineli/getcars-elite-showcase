@@ -244,7 +244,7 @@ function Index() {
               <p className="text-muted-foreground max-w-2xl mx-auto mb-10 leading-relaxed text-lg">
                 Solicite uma avaliação gratuita e receba uma proposta justa e transparente pelo seu veículo. Todo o processo é conduzido com sigilo e agilidade.
               </p>
-              <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-gold-gradient text-primary-foreground font-medium tracking-wide hover:shadow-[0_0_40px_-5px_var(--gold)] transition-all">
+              <a href={whatsappLink("Olá, GETCARS! Gostaria de vender meu veículo e solicitar uma avaliação.")} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-gold-gradient text-primary-foreground font-medium tracking-wide hover:shadow-[0_0_40px_-5px_var(--gold)] transition-all">
                 <MessageCircle className="h-5 w-5" />
                 Solicitar avaliação no WhatsApp
               </a>
@@ -280,7 +280,7 @@ function Index() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="card-premium card-premium-hover rounded-lg p-10 flex items-center gap-6 group">
+            <a href={whatsappLink("Olá, GETCARS! Gostaria de falar com um consultor.")} target="_blank" rel="noopener noreferrer" className="card-premium card-premium-hover rounded-lg p-10 flex items-center gap-6 group">
               <div className="h-16 w-16 rounded-full bg-gold-gradient flex items-center justify-center shrink-0">
                 <MessageCircle className="h-7 w-7 text-primary-foreground" />
               </div>
@@ -340,7 +340,7 @@ function Index() {
               <p className="text-xs tracking-[0.25em] text-gold uppercase mb-5">Contato</p>
               <ul className="space-y-3 text-sm text-muted-foreground">
                 <li>
-                  <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="hover:text-gold transition-colors inline-flex items-center gap-2">
+                  <a href={whatsappLink()} target="_blank" rel="noopener noreferrer" className="hover:text-gold transition-colors inline-flex items-center gap-2">
                     <MessageCircle className="h-4 w-4" /> WhatsApp
                   </a>
                 </li>
