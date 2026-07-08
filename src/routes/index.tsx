@@ -27,8 +27,13 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 
-const WHATSAPP_URL = "https://wa.me/5511999999999";
+const WHATSAPP_NUMBER = "5511999999999";
 const INSTAGRAM_URL = "https://instagram.com/getcars";
+
+function whatsappLink(mensagem?: string) {
+  const base = `https://wa.me/${WHATSAPP_NUMBER}`;
+  return mensagem ? `${base}?text=${encodeURIComponent(mensagem)}` : base;
+}
 
 const nav = [
   { label: "Início", href: "#inicio" },
