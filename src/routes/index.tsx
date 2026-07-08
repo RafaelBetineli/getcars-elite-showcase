@@ -27,8 +27,13 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 
-const WHATSAPP_URL = "https://wa.me/5511999999999";
+const WHATSAPP_NUMBER = "5511999999999";
 const INSTAGRAM_URL = "https://instagram.com/getcars";
+
+function whatsappLink(mensagem?: string) {
+  const base = `https://wa.me/${WHATSAPP_NUMBER}`;
+  return mensagem ? `${base}?text=${encodeURIComponent(mensagem)}` : base;
+}
 
 const nav = [
   { label: "Início", href: "#inicio" },
@@ -80,7 +85,7 @@ function Index() {
               ))}
             </nav>
 
-            <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="hidden lg:inline-flex items-center gap-2 px-5 py-2.5 rounded-full border-gold-subtle text-gold text-sm hover:bg-gold hover:text-primary-foreground transition-all">
+            <a href={whatsappLink()} target="_blank" rel="noopener noreferrer" className="hidden lg:inline-flex items-center gap-2 px-5 py-2.5 rounded-full border-gold-subtle text-gold text-sm hover:bg-gold hover:text-primary-foreground transition-all">
               <MessageCircle className="h-4 w-4" />
               WhatsApp
             </a>
@@ -97,7 +102,7 @@ function Index() {
                   {n.label}
                 </a>
               ))}
-              <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="mt-3 inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gold-gradient text-primary-foreground text-sm font-medium">
+              <a href={whatsappLink()} target="_blank" rel="noopener noreferrer" className="mt-3 inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gold-gradient text-primary-foreground text-sm font-medium">
                 <MessageCircle className="h-4 w-4" />
                 Falar no WhatsApp
               </a>
@@ -134,7 +139,7 @@ function Index() {
                 Ver veículos disponíveis
                 <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
               </a>
-              <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full border-gold-subtle text-gold hover:bg-gold hover:text-primary-foreground transition-all">
+              <a href={whatsappLink("Olá, GETCARS! Gostaria de conhecer os veículos disponíveis.")} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full border-gold-subtle text-gold hover:bg-gold hover:text-primary-foreground transition-all">
                 <MessageCircle className="h-4 w-4" />
                 Falar no WhatsApp
               </a>
@@ -168,7 +173,7 @@ function Index() {
 
       <section id="veiculos" className="py-24 lg:py-32 bg-surface/40 border-y border-gold-subtle">
         <div className="mx-auto max-w-7xl px-6 lg:px-10">
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+          <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-6">
             <div>
               <p className="text-xs tracking-[0.3em] text-gold uppercase mb-4">Coleção</p>
               <h2 className="font-display text-4xl lg:text-5xl font-medium">
@@ -180,9 +185,13 @@ function Index() {
             </p>
           </div>
 
+          <p className="text-sm text-muted-foreground/80 italic max-w-3xl mb-14 leading-relaxed">
+            Os valores são informados mediante consulta para garantir uma negociação personalizada, considerando forma de pagamento, troca, financiamento e condições comerciais.
+          </p>
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {veiculos.map((v) => (
-              <article key={v.nome} className="card-premium card-premium-hover rounded-lg overflow-hidden group">
+              <article key={v.nome} className="card-premium card-premium-hover rounded-lg overflow-hidden group flex flex-col">
                 <div className="relative aspect-[16/10] overflow-hidden bg-black">
                   <img src={v.img} alt={v.nome} loading="lazy" width={1200} height={800} className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" />
                   <div className="absolute top-4 left-4 inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-background/80 backdrop-blur border-gold-subtle">
@@ -191,10 +200,11 @@ function Index() {
                   </div>
                 </div>
 
-                <div className="p-8">
-                  <h3 className="font-display text-2xl mb-4">{v.nome}</h3>
+                <div className="p-8 flex flex-col flex-1">
+                  <h3 className="font-display text-2xl mb-2">{v.nome}</h3>
+                  <p className="text-gold-soft text-sm tracking-wide mb-5">Valor mediante consulta</p>
 
-                  <div className="flex flex-wrap gap-6 mb-6 text-sm text-muted-foreground">
+                  <div className="flex flex-wrap gap-6 mb-8 text-sm text-muted-foreground">
                     <div className="flex items-center gap-2">
                       <Calendar className="h-4 w-4 text-gold" />
                       <span>{v.ano}</span>
@@ -205,9 +215,15 @@ function Index() {
                     </div>
                   </div>
 
-                  <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-sm text-gold border-b border-gold/40 pb-1 hover:border-gold transition-colors">
-                    Tenho interesse
-                    <ArrowRight className="h-4 w-4" />
+                  <a
+                    href={whatsappLink(`Olá, GETCARS! Tenho interesse no ${v.nome} e gostaria de receber mais informações.`)} 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className="mt-auto inline-flex items-center justify-center gap-2 w-full px-6 py-3.5 rounded-full bg-gold-gradient text-primary-foreground text-sm font-medium tracking-wide hover:shadow-[0_0_40px_-8px_var(--gold)] transition-all group/btn"
+                  >
+                    <MessageCircle className="h-4 w-4" />
+                    Consultar veículo
+                    <ArrowRight className="h-4 w-4 group-hover/btn:translate-x-1 transition-transform" />
                   </a>
                 </div>
               </article>
@@ -228,7 +244,7 @@ function Index() {
               <p className="text-muted-foreground max-w-2xl mx-auto mb-10 leading-relaxed text-lg">
                 Solicite uma avaliação gratuita e receba uma proposta justa e transparente pelo seu veículo. Todo o processo é conduzido com sigilo e agilidade.
               </p>
-              <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-gold-gradient text-primary-foreground font-medium tracking-wide hover:shadow-[0_0_40px_-5px_var(--gold)] transition-all">
+              <a href={whatsappLink("Olá, GETCARS! Gostaria de vender meu veículo e solicitar uma avaliação.")} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-gold-gradient text-primary-foreground font-medium tracking-wide hover:shadow-[0_0_40px_-5px_var(--gold)] transition-all">
                 <MessageCircle className="h-5 w-5" />
                 Solicitar avaliação no WhatsApp
               </a>
@@ -264,7 +280,7 @@ function Index() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="card-premium card-premium-hover rounded-lg p-10 flex items-center gap-6 group">
+            <a href={whatsappLink("Olá, GETCARS! Gostaria de falar com um consultor.")} target="_blank" rel="noopener noreferrer" className="card-premium card-premium-hover rounded-lg p-10 flex items-center gap-6 group">
               <div className="h-16 w-16 rounded-full bg-gold-gradient flex items-center justify-center shrink-0">
                 <MessageCircle className="h-7 w-7 text-primary-foreground" />
               </div>
@@ -324,7 +340,7 @@ function Index() {
               <p className="text-xs tracking-[0.25em] text-gold uppercase mb-5">Contato</p>
               <ul className="space-y-3 text-sm text-muted-foreground">
                 <li>
-                  <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="hover:text-gold transition-colors inline-flex items-center gap-2">
+                  <a href={whatsappLink()} target="_blank" rel="noopener noreferrer" className="hover:text-gold transition-colors inline-flex items-center gap-2">
                     <MessageCircle className="h-4 w-4" /> WhatsApp
                   </a>
                 </li>
