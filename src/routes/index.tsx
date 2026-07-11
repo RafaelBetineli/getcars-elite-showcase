@@ -563,17 +563,18 @@ function Index() {
 
       {/* FOOTER */}
       <footer className="border-t border-gold-subtle bg-surface/60">
-        <div className="mx-auto max-w-[1720px] px-6 md:px-10 lg:px-16 xl:px-24 py-20">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-14">
+        <div className="mx-auto max-w-[1720px] px-6 md:px-10 lg:px-16 xl:px-24 py-16">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mb-10">
             <div>
-              <div className="flex items-center gap-3 mb-5">
-                <img src={logo} alt="GETCARS" className="h-10 w-10 object-contain" width={40} height={40} loading="lazy" />
-                <span className="font-display text-xl tracking-[0.28em] text-gold-gradient font-semibold">GETCARS</span>
+              <div className="flex items-center gap-3 mb-4">
+                <img src={logo} alt="GETCARS" className="h-9 w-9 object-contain" width={36} height={36} loading="lazy" />
+                <span className="font-display text-lg tracking-[0.28em] text-gold-gradient font-semibold">GETCARS</span>
               </div>
-              <p className="text-muted-foreground italic font-display text-lg leading-relaxed">
-                Veículos premium, exclusivos e blindados.
+              <p className="text-muted-foreground italic font-display text-base leading-relaxed max-w-xs">
+                Veículos premium com qualidade, procedência e exclusividade.
               </p>
             </div>
+
 
             <div>
               <p className="text-[10px] tracking-[0.3em] text-gold uppercase mb-6">Navegação</p>
