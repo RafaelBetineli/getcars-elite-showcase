@@ -196,40 +196,40 @@ function Index() {
       </header>
 
       {/* HERO */}
-      <section id="inicio" className="relative min-h-screen flex items-center overflow-hidden">
+      <section id="inicio" className="relative min-h-screen flex items-center overflow-hidden max-md:min-h-[calc(100svh-5rem)] max-md:items-start">
         <div className="absolute inset-0">
           <img
             src={heroCar}
             alt="Veículo premium GETCARS"
-            className="h-full w-full object-cover object-[55%_center] lg:object-[75%_center]"
+            className="h-full w-full object-cover object-[55%_center] lg:object-[75%_center] max-md:object-[80%_70%]"
             width={1920}
             height={1080}
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-background via-background/60 md:via-background/70 lg:via-background/85 to-transparent" />
-          <div className="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-background/45 lg:via-background/30 lg:to-background/60" />
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_left,oklch(0.08_0.005_60/0.35),transparent_60%)] lg:bg-[radial-gradient(ellipse_at_left,oklch(0.08_0.005_60/0.6),transparent_60%)]" />
-          <div className="absolute inset-0 bg-gradient-to-b from-background/35 via-transparent to-background/55 lg:from-background/60 lg:to-background/80" />
+          <div className="absolute inset-0 bg-gradient-to-r from-background via-background/60 md:via-background/70 lg:via-background/85 to-transparent max-md:via-background/40" />
+          <div className="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-background/45 lg:via-background/30 lg:to-background/60 max-md:from-background/50 max-md:via-background/10 max-md:to-background/70" />
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_left,oklch(0.08_0.005_60/0.35),transparent_60%)] lg:bg-[radial-gradient(ellipse_at_left,oklch(0.08_0.005_60/0.6),transparent_60%)] max-md:bg-[radial-gradient(ellipse_at_left,oklch(0.08_0.005_60/0.55),transparent_65%)]" />
+          <div className="absolute inset-0 bg-gradient-to-b from-background/35 via-transparent to-background/55 lg:from-background/60 lg:to-background/80 max-md:from-background/70 max-md:via-transparent max-md:to-background/20" />
         </div>
 
-        <div className="relative mx-auto max-w-[1720px] w-full px-6 md:px-10 lg:px-16 xl:px-24 pt-32 pb-24">
+        <div className="relative mx-auto max-w-[1720px] w-full px-6 md:px-10 lg:px-16 xl:px-24 pt-32 pb-24 max-md:pt-28 max-md:pb-16">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
             <div className="lg:col-span-6 xl:col-span-5">
-              <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full border-gold-subtle mb-10 bg-background/40 backdrop-blur">
-                <span className="h-1.5 w-1.5 rounded-full bg-gold animate-pulse" />
-                <span className="text-[10px] sm:text-xs tracking-[0.3em] text-gold uppercase">{BADGE}</span>
+              <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full border-gold-subtle mb-10 bg-background/40 backdrop-blur max-md:px-3 max-md:py-1.5 max-md:mb-6 max-md:gap-2">
+                <span className="h-1.5 w-1.5 rounded-full bg-gold animate-pulse max-md:h-1 max-md:w-1" />
+                <span className="text-[10px] sm:text-xs tracking-[0.3em] text-gold uppercase max-md:text-[9px] max-md:tracking-[0.25em]">{BADGE}</span>
               </div>
 
-              <h1 className="font-display text-[2.75rem] sm:text-6xl lg:text-7xl xl:text-[5.5rem] font-medium leading-[1.02] mb-8 tracking-tight">
+              <h1 className="font-display text-[2.75rem] sm:text-6xl lg:text-7xl xl:text-[5.5rem] font-medium leading-[1.02] mb-8 tracking-tight max-md:mb-6">
                 Veículos <span className="text-gold-gradient italic">Premium</span>,
                 <br />
                 Exclusivos e <span className="text-gold-gradient italic">Blindados</span>
               </h1>
 
-              <p className="text-lg lg:text-xl text-muted-foreground max-w-xl leading-relaxed mb-12">
+              <p className="text-lg lg:text-xl text-muted-foreground max-w-xl leading-relaxed mb-12 max-md:mb-8 max-md:text-base">
                 Revenda especializada em veículos de alto padrão, com atendimento personalizado, qualidade e procedência.
               </p>
 
-              <div className="flex flex-col sm:flex-row gap-4">
+              <div className="flex flex-col sm:flex-row gap-4 max-md:gap-3">
                 <a href="#veiculos" className="group inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full bg-gold-gradient text-primary-foreground font-medium tracking-wide hover:shadow-[0_0_50px_-5px_var(--gold)] transition-all">
                   Ver veículos disponíveis
                   <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
