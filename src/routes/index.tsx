@@ -256,19 +256,19 @@ function Index() {
       </section>
 
       {/* JORNADA GETCARS — timeline editorial */}
-      <section className="py-28 lg:py-40 relative">
+      <section className="py-20 lg:py-28 relative">
         <div className="mx-auto max-w-[1720px] px-6 md:px-10 lg:px-16 xl:px-24">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-14 lg:gap-20">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
             {/* Editorial column */}
-            <div className="lg:col-span-5 lg:sticky lg:top-32 self-start">
-              <p className="text-[11px] tracking-[0.35em] text-gold uppercase mb-6">A jornada GETCARS</p>
-              <h2 className="font-display text-4xl lg:text-5xl xl:text-6xl font-medium leading-[1.05] mb-8">
+            <div className="lg:col-span-5 lg:sticky lg:top-28 self-start">
+              <p className="text-[11px] tracking-[0.35em] text-gold uppercase mb-5">A jornada GETCARS</p>
+              <h2 className="font-display text-4xl lg:text-5xl xl:text-6xl font-medium leading-[1.05] mb-6">
                 Uma experiência premium do <span className="text-gold-gradient italic">primeiro contato</span> à entrega
               </h2>
-              <p className="text-lg text-muted-foreground leading-relaxed mb-10">
+              <p className="text-lg text-muted-foreground leading-relaxed mb-8">
                 Cada veículo é tratado com critério, cada negociação com transparência e cada cliente com atendimento personalizado.
               </p>
-              <div className="hidden lg:block relative aspect-[4/5] rounded-lg overflow-hidden border-gold-subtle">
+              <div className="hidden lg:block relative aspect-[3/2] rounded-lg overflow-hidden border-gold-subtle">
                 <img
                   src={heroCar}
                   alt="Detalhe automotivo premium"
@@ -282,7 +282,7 @@ function Index() {
             {/* Timeline column */}
             <div className="lg:col-span-7 relative">
               <div className="absolute left-6 lg:left-7 top-3 bottom-3 w-px bg-gradient-to-b from-gold/40 via-gold/15 to-transparent" aria-hidden />
-              <ol className="space-y-10 lg:space-y-14">
+              <ol className="space-y-6 lg:space-y-8">
                 {jornada.map((j) => (
                   <li key={j.step} className="relative pl-20 lg:pl-24 group">
                     <div className="absolute left-0 top-0 h-12 w-12 lg:h-14 lg:w-14 rounded-full border-gold-subtle bg-background flex items-center justify-center group-hover:border-gold/60 group-hover:bg-gold/5 transition-all duration-500">
@@ -292,7 +292,7 @@ function Index() {
                       <span className="text-[10px] tracking-[0.35em] text-gold/70 uppercase">{j.step}</span>
                       <span className="h-px w-10 bg-gold/25" />
                     </div>
-                    <h3 className="font-display text-2xl lg:text-3xl mb-3 text-foreground leading-tight">
+                    <h3 className="font-display text-2xl lg:text-3xl mb-2 text-foreground leading-tight">
                       {j.title}
                     </h3>
                     <p className="text-[15px] text-muted-foreground leading-relaxed max-w-xl">{j.text}</p>
