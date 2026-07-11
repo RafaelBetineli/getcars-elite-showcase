@@ -211,7 +211,7 @@ function Index() {
           <div className="absolute inset-0 bg-gradient-to-b from-background/35 via-transparent to-background/55 lg:from-background/60 lg:to-background/80 max-md:from-background/30 max-md:via-transparent max-md:to-background/10" />
         </div>
 
-        <div className="relative mx-auto max-w-[1720px] w-full px-6 md:px-10 lg:px-16 xl:px-24 pt-32 pb-24 max-md:pt-14 max-md:pb-28">
+        <div className="relative mx-auto max-w-[1720px] w-full px-6 md:px-10 lg:px-16 xl:px-24 pt-32 pb-24 max-md:pt-14 max-md:pb-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
             <div className="lg:col-span-6 xl:col-span-5">
               <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full border-gold-subtle mb-10 bg-background/40 backdrop-blur max-md:px-3 max-md:py-1.5 max-md:mb-4 max-md:gap-2">
