@@ -201,14 +201,14 @@ function Index() {
           <img
             src={heroCar}
             alt="Veículo premium GETCARS"
-            className="h-full w-full object-cover object-[55%_center] lg:object-[75%_center] max-md:object-[80%_70%]"
+            className="h-full w-full object-cover object-[55%_center] lg:object-[75%_center] max-md:object-[85%_75%]"
             width={1920}
             height={1080}
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-background via-background/60 md:via-background/70 lg:via-background/85 to-transparent max-md:via-background/40" />
-          <div className="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-background/45 lg:via-background/30 lg:to-background/60 max-md:from-background/50 max-md:via-background/10 max-md:to-background/70" />
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_left,oklch(0.08_0.005_60/0.35),transparent_60%)] lg:bg-[radial-gradient(ellipse_at_left,oklch(0.08_0.005_60/0.6),transparent_60%)] max-md:bg-[radial-gradient(ellipse_at_left,oklch(0.08_0.005_60/0.55),transparent_65%)]" />
-          <div className="absolute inset-0 bg-gradient-to-b from-background/35 via-transparent to-background/55 lg:from-background/60 lg:to-background/80 max-md:from-background/70 max-md:via-transparent max-md:to-background/20" />
+          <div className="absolute inset-0 bg-gradient-to-r from-background via-background/60 md:via-background/70 lg:via-background/85 to-transparent max-md:via-background/55" />
+          <div className="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-background/45 lg:via-background/30 lg:to-background/60 max-md:from-background/60 max-md:via-background/15 max-md:to-background/75" />
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_left,oklch(0.08_0.005_60/0.35),transparent_60%)] lg:bg-[radial-gradient(ellipse_at_left,oklch(0.08_0.005_60/0.6),transparent_60%)] max-md:bg-[radial-gradient(ellipse_at_left,oklch(0.08_0.005_60/0.7),transparent_75%)]" />
+          <div className="absolute inset-0 bg-gradient-to-b from-background/35 via-transparent to-background/55 lg:from-background/60 lg:to-background/80 max-md:from-background/75 max-md:via-transparent max-md:to-background/25" />
         </div>
 
         <div className="relative mx-auto max-w-[1720px] w-full px-6 md:px-10 lg:px-16 xl:px-24 pt-32 pb-24 max-md:pt-28 max-md:pb-16">
