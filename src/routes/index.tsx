@@ -328,17 +328,20 @@ function Index() {
             {/* Featured car */}
             <article className="lg:col-span-7 card-premium card-premium-hover rounded-lg overflow-hidden group flex flex-col">
               <div className="relative aspect-[16/11] overflow-hidden bg-black">
-                <img src={veiculoDestaque.img} alt={veiculoDestaque.nome} loading="lazy" width={1600} height={1100} className="h-full w-full object-cover transition-transform duration-[1200ms] group-hover:scale-105" />
+                <img src={veiculoDestaque.img} alt={veiculoDestaque.nome} loading="lazy" width={1600} height={1100} className="h-full w-full object-cover object-[45%_center] sm:object-center transition-transform duration-[1200ms] group-hover:scale-105" />
                 <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/20 to-transparent" />
-                <div className="absolute top-6 left-6">
+                <div className="absolute top-4 left-4 sm:top-6 sm:left-6">
                   <StatusBadge vehicle={veiculoDestaque} />
                 </div>
-                <div className="absolute top-6 right-6 text-[10px] tracking-[0.3em] uppercase text-gold/80">
+                <div className="hidden sm:block absolute top-6 right-6 text-[10px] tracking-[0.3em] uppercase text-gold/80">
                   {veiculoDestaque.categoria}
                 </div>
-                <div className="absolute bottom-6 left-6 right-6">
+                <div className="absolute bottom-4 left-4 right-4 sm:bottom-6 sm:left-6 sm:right-6">
+                  <p className="sm:hidden text-[10px] tracking-[0.3em] uppercase text-gold/80 mb-2">
+                    {veiculoDestaque.categoria}
+                  </p>
                   <p className="text-[10px] tracking-[0.3em] uppercase text-gold mb-2">Destaque da semana</p>
-                  <h3 className="font-display text-3xl lg:text-5xl">{veiculoDestaque.nome}</h3>
+                  <h3 className="font-display text-2xl sm:text-3xl lg:text-5xl">{veiculoDestaque.nome}</h3>
                 </div>
               </div>
               <div className="p-8 lg:p-10 flex flex-col lg:flex-row lg:items-center gap-8">
@@ -365,13 +368,13 @@ function Index() {
             <div className="lg:col-span-5 grid grid-cols-1 gap-8">
               {veiculosGrid.map((v) => (
                 <article key={v.id} className="card-premium card-premium-hover rounded-lg overflow-hidden group grid grid-cols-1 sm:grid-cols-2">
-                  <div className="relative aspect-[4/3] sm:aspect-auto overflow-hidden bg-black">
-                    <img src={v.img} alt={v.nome} loading="lazy" width={800} height={600} className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                  <div className="relative aspect-[16/10] sm:aspect-auto overflow-hidden bg-black">
+                    <img src={v.img} alt={v.nome} loading="lazy" width={800} height={600} className="h-full w-full object-cover object-[55%_center] sm:object-center transition-transform duration-700 group-hover:scale-105" />
                     <div className="absolute top-3 left-3">
                       <StatusBadge vehicle={v} size="sm" />
                     </div>
                   </div>
-                  <div className="p-6 flex flex-col">
+                  <div className="p-5 sm:p-6 flex flex-col">
                     <p className="text-[10px] tracking-[0.25em] uppercase text-gold/70 mb-2">{v.categoria}</p>
                     <h3 className="font-display text-xl lg:text-2xl mb-2 leading-tight">{v.nome}</h3>
                     <p className="text-gold-soft text-xs tracking-wide mb-4">Valor mediante consulta</p>
@@ -382,7 +385,7 @@ function Index() {
                     <a
                       href={whatsappLink(v.whatsappMensagem)}
                       target="_blank" rel="noopener noreferrer"
-                      className="mt-auto inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-full border-gold-subtle text-gold text-xs uppercase tracking-[0.15em] hover:bg-gold hover:text-primary-foreground transition-all"
+                      className="mt-auto inline-flex items-center justify-center gap-2 px-4 py-2.5 sm:px-5 rounded-full border-gold-subtle text-gold text-[11px] sm:text-xs uppercase tracking-[0.15em] hover:bg-gold hover:text-primary-foreground transition-all"
                     >
                       Consultar veículo
                       <ArrowRight className="h-3.5 w-3.5" />
