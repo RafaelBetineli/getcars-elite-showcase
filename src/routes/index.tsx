@@ -45,26 +45,30 @@ const nav = [
   { label: "Contato", href: "#contato" },
 ];
 
-const diferenciais = [
-  {
-    icon: ShieldCheck,
-    title: "Procedência verificada",
-    text: "Veículos selecionados com análise documental, histórico e critérios de qualidade.",
-  },
-  {
-    icon: Sparkles,
-    title: "Atendimento consultivo",
-    text: "Uma negociação personalizada, conduzida com discrição e atenção ao perfil de cada cliente.",
-  },
+const jornada = [
   {
     icon: Gem,
-    title: "Premium, exclusivos e blindados",
-    text: "Curadoria de esportivos, SUVs de luxo, caminhonetes premium e veículos blindados.",
+    step: "01",
+    title: "Curadoria",
+    text: "Selecionamos veículos premium com foco em qualidade, perfil comercial e oportunidade.",
+  },
+  {
+    icon: ShieldCheck,
+    step: "02",
+    title: "Procedência",
+    text: "Analisamos documentação, histórico e critérios essenciais para uma negociação segura.",
   },
   {
     icon: Handshake,
-    title: "Compra, venda e intermediação",
-    text: "Soluções completas para quem deseja comprar, vender ou negociar um veículo de alto padrão.",
+    step: "03",
+    title: "Negociação",
+    text: "Conduzimos cada etapa com transparência, discrição e atenção ao perfil do cliente.",
+  },
+  {
+    icon: KeyRound,
+    step: "04",
+    title: "Entrega",
+    text: "Oferecemos suporte até a conclusão do processo de compra, venda ou intermediação.",
   },
 ];
 
@@ -79,7 +83,7 @@ const etapasVenda = [
     icon: Compass,
     step: "02",
     title: "Estratégia",
-    text: "Definimos a melhor forma de negociação, venda direta ou intermediação.",
+    text: "Definimos a melhor forma de negociação, seja venda direta, troca ou intermediação.",
   },
   {
     icon: KeyRound,
@@ -90,14 +94,30 @@ const etapasVenda = [
 ];
 
 const pilares = [
-  "Curadoria premium",
-  "Procedência e documentação",
-  "Atendimento personalizado",
-  "Negociação segura",
+  {
+    icon: Gem,
+    title: "Curadoria premium",
+    text: "Veículos selecionados com atenção ao perfil, estado e oportunidade.",
+  },
+  {
+    icon: ShieldCheck,
+    title: "Procedência e documentação",
+    text: "Análise criteriosa para garantir mais segurança em cada negociação.",
+  },
+  {
+    icon: Sparkles,
+    title: "Atendimento personalizado",
+    text: "Contato direto, consultivo e adaptado ao objetivo de cada cliente.",
+  },
+  {
+    icon: Handshake,
+    title: "Negociação segura",
+    text: "Processo conduzido com clareza, discrição e suporte até a conclusão.",
+  },
 ];
 
 function StatusBadge({ vehicle, size = "md" }: { vehicle: Vehicle; size?: "sm" | "md" }) {
-  const Icon = vehicle.blindado ? Shield : BadgeCheck;
+  const Icon = vehicle.statusType === "armored" ? Shield : BadgeCheck;
   const isSm = size === "sm";
   return (
     <span
@@ -235,13 +255,13 @@ function Index() {
         </div>
       </section>
 
-      {/* DIFERENCIAIS — editorial */}
+      {/* JORNADA GETCARS — timeline editorial */}
       <section className="py-28 lg:py-40 relative">
         <div className="mx-auto max-w-[1720px] px-6 md:px-10 lg:px-16 xl:px-24">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-14 lg:gap-20">
             {/* Editorial column */}
             <div className="lg:col-span-5 lg:sticky lg:top-32 self-start">
-              <p className="text-[11px] tracking-[0.35em] text-gold uppercase mb-6">A experiência GETCARS</p>
+              <p className="text-[11px] tracking-[0.35em] text-gold uppercase mb-6">A jornada GETCARS</p>
               <h2 className="font-display text-4xl lg:text-5xl xl:text-6xl font-medium leading-[1.05] mb-8">
                 Uma experiência premium do <span className="text-gold-gradient italic">primeiro contato</span> à entrega
               </h2>
@@ -253,48 +273,38 @@ function Index() {
                   src={heroCar}
                   alt="Detalhe automotivo premium"
                   loading="lazy"
-                  className="h-full w-full object-cover object-[60%_center] grayscale-[20%]"
+                  className="h-full w-full object-cover object-[60%_center] grayscale-[15%]"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent" />
-                <div className="absolute bottom-6 left-6 right-6">
-                  <p className="text-[10px] tracking-[0.35em] uppercase text-gold mb-2">Critério · Discrição · Padrão</p>
-                  <p className="font-display text-xl text-foreground/90 leading-snug">
-                    Cada detalhe é parte de uma experiência pensada para quem exige o melhor.
-                  </p>
-                </div>
+                <div className="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-transparent" />
               </div>
             </div>
 
-            {/* Diferenciais column — asymmetric stack */}
-            <div className="lg:col-span-7 space-y-6">
-              {diferenciais.map((d, i) => (
-                <div
-                  key={d.title}
-                  className={`group relative rounded-lg border-gold-subtle bg-surface/40 hover:bg-surface/70 transition-all duration-500 p-8 lg:p-10 ${
-                    i % 2 === 0 ? "lg:ml-0 lg:mr-8" : "lg:ml-12 lg:mr-0"
-                  }`}
-                >
-                  <div className="flex items-start gap-6">
-                    <div className="shrink-0 h-14 w-14 rounded-full border-gold-subtle flex items-center justify-center group-hover:bg-gold/10 group-hover:border-gold/60 transition-all duration-500">
-                      <d.icon className="h-5 w-5 text-gold" />
+            {/* Timeline column */}
+            <div className="lg:col-span-7 relative">
+              <div className="absolute left-6 lg:left-7 top-3 bottom-3 w-px bg-gradient-to-b from-gold/40 via-gold/15 to-transparent" aria-hidden />
+              <ol className="space-y-10 lg:space-y-14">
+                {jornada.map((j) => (
+                  <li key={j.step} className="relative pl-20 lg:pl-24 group">
+                    <div className="absolute left-0 top-0 h-12 w-12 lg:h-14 lg:w-14 rounded-full border-gold-subtle bg-background flex items-center justify-center group-hover:border-gold/60 group-hover:bg-gold/5 transition-all duration-500">
+                      <j.icon className="h-5 w-5 text-gold" />
                     </div>
-                    <div className="min-w-0 flex-1">
-                      <div className="flex items-center gap-3 mb-3">
-                        <span className="text-[10px] tracking-[0.3em] text-gold/70 uppercase">0{i + 1}</span>
-                        <span className="h-px flex-1 bg-gold/15" />
-                      </div>
-                      <h3 className="font-display text-2xl lg:text-3xl mb-3 text-foreground leading-tight">
-                        {d.title}
-                      </h3>
-                      <p className="text-[15px] text-muted-foreground leading-relaxed">{d.text}</p>
+                    <div className="flex items-center gap-3 mb-2">
+                      <span className="text-[10px] tracking-[0.35em] text-gold/70 uppercase">{j.step}</span>
+                      <span className="h-px w-10 bg-gold/25" />
                     </div>
-                  </div>
-                </div>
-              ))}
+                    <h3 className="font-display text-2xl lg:text-3xl mb-3 text-foreground leading-tight">
+                      {j.title}
+                    </h3>
+                    <p className="text-[15px] text-muted-foreground leading-relaxed max-w-xl">{j.text}</p>
+                  </li>
+                ))}
+              </ol>
             </div>
           </div>
         </div>
       </section>
+
+
 
       {/* VEÍCULOS */}
       <section id="veiculos" className="py-28 lg:py-40 bg-surface/40 border-y border-gold-subtle relative">
@@ -463,74 +473,108 @@ function Index() {
             </div>
           </div>
 
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-px bg-gold/10 border-gold-subtle rounded-lg overflow-hidden">
+          <div className="mb-10 flex items-center gap-4">
+            <span className="h-px w-10 bg-gold/50" />
+            <p className="text-[11px] tracking-[0.35em] text-gold uppercase">O padrão GETCARS</p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
             {pilares.map((p, i) => (
               <div
-                key={p}
-                className="bg-background/60 p-8 lg:p-10 flex flex-col justify-between min-h-[180px] group hover:bg-surface/70 transition-colors duration-500"
+                key={p.title}
+                className="group relative rounded-lg border-gold-subtle bg-background/50 hover:bg-surface/70 transition-all duration-500 p-8 lg:p-10 flex flex-col min-h-[240px]"
               >
-                <span className="text-[10px] tracking-[0.35em] text-gold/70 uppercase">0{i + 1}</span>
-                <p className="font-display text-xl lg:text-2xl leading-tight text-foreground">{p}</p>
+                <div className="flex items-center justify-between mb-8">
+                  <div className="h-12 w-12 rounded-full border-gold-subtle flex items-center justify-center group-hover:bg-gold/10 group-hover:border-gold/60 transition-all">
+                    <p.icon className="h-5 w-5 text-gold" />
+                  </div>
+                  <span className="text-[10px] tracking-[0.35em] text-gold/60 uppercase">0{i + 1}</span>
+                </div>
+                <h3 className="font-display text-xl lg:text-2xl mb-3 leading-tight text-foreground">{p.title}</h3>
+                <p className="text-sm text-muted-foreground leading-relaxed">{p.text}</p>
               </div>
             ))}
           </div>
+
         </div>
       </section>
 
       {/* CONTATO */}
-      <section id="contato" className="py-28 lg:py-40">
-        <div className="mx-auto max-w-[1720px] px-6 md:px-10 lg:px-16 xl:px-24">
+      <section id="contato" className="py-28 lg:py-40 relative overflow-hidden">
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,oklch(0.78_0.13_80/0.06),transparent_65%)]" />
+        </div>
+        <div className="relative mx-auto max-w-[1720px] px-6 md:px-10 lg:px-16 xl:px-24">
           <div className="text-center mb-16 max-w-3xl mx-auto">
             <p className="text-[11px] tracking-[0.35em] text-gold uppercase mb-5">Contato</p>
-            <h2 className="font-display text-4xl lg:text-6xl font-medium">
-              Vamos <span className="text-gold-gradient italic">conversar</span>
+            <h2 className="font-display text-4xl lg:text-6xl font-medium leading-[1.05] mb-6">
+              Pronto para encontrar seu próximo <span className="text-gold-gradient italic">veículo premium?</span>
             </h2>
+            <p className="text-lg text-muted-foreground leading-relaxed">
+              Fale com a GETCARS para consultar veículos disponíveis, negociar seu veículo ou receber atendimento personalizado.
+            </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-            <a href={whatsappLink("Olá, GETCARS! Gostaria de falar com um consultor.")} target="_blank" rel="noopener noreferrer" className="card-premium card-premium-hover rounded-lg p-10 lg:p-12 flex items-center gap-6 group">
-              <div className="h-16 w-16 rounded-full bg-gold-gradient flex items-center justify-center shrink-0">
-                <MessageCircle className="h-7 w-7 text-primary-foreground" />
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 max-w-5xl mx-auto">
+            <a href={whatsappLink("Olá, GETCARS! Gostaria de falar com um consultor.")} target="_blank" rel="noopener noreferrer" className="card-premium card-premium-hover rounded-lg p-10 lg:p-12 flex flex-col group">
+              <div className="flex items-center gap-5 mb-6">
+                <div className="h-14 w-14 rounded-full bg-gold-gradient flex items-center justify-center shrink-0">
+                  <MessageCircle className="h-6 w-6 text-primary-foreground" />
+                </div>
+                <div>
+                  <p className="text-[10px] tracking-[0.3em] text-gold uppercase mb-1">WhatsApp</p>
+                  <p className="font-display text-2xl">Atendimento direto</p>
+                </div>
               </div>
-              <div className="min-w-0">
-                <p className="text-[10px] tracking-[0.3em] text-gold uppercase mb-1">WhatsApp</p>
-                <p className="font-display text-2xl mb-1">Atendimento direto</p>
-                <p className="text-sm text-muted-foreground truncate">Seg-Sáb · 9h às 19h</p>
-              </div>
+              <p className="text-sm text-muted-foreground leading-relaxed mb-6">
+                Atendimento direto para consultas, avaliações e negociações.
+              </p>
+              <span className="mt-auto inline-flex items-center gap-2 text-xs uppercase tracking-[0.25em] text-gold group-hover:gap-3 transition-all">
+                Iniciar conversa <ArrowRight className="h-3.5 w-3.5" />
+              </span>
             </a>
 
-            <a href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer" className="card-premium card-premium-hover rounded-lg p-10 lg:p-12 flex items-center gap-6 group">
-              <div className="h-16 w-16 rounded-full bg-gold-gradient flex items-center justify-center shrink-0">
-                <Instagram className="h-7 w-7 text-primary-foreground" />
+            <a href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer" className="card-premium card-premium-hover rounded-lg p-10 lg:p-12 flex flex-col group">
+              <div className="flex items-center gap-5 mb-6">
+                <div className="h-14 w-14 rounded-full bg-gold-gradient flex items-center justify-center shrink-0">
+                  <Instagram className="h-6 w-6 text-primary-foreground" />
+                </div>
+                <div>
+                  <p className="text-[10px] tracking-[0.3em] text-gold uppercase mb-1">Instagram</p>
+                  <p className="font-display text-2xl">@getcars_</p>
+                </div>
               </div>
-              <div className="min-w-0">
-                <p className="text-[10px] tracking-[0.3em] text-gold uppercase mb-1">Instagram</p>
-                <p className="font-display text-2xl mb-1">@getcars</p>
-                <p className="text-sm text-muted-foreground truncate">Coleção em tempo real</p>
-              </div>
+              <p className="text-sm text-muted-foreground leading-relaxed mb-6">
+                Acompanhe oportunidades, novidades e veículos em destaque.
+              </p>
+              <span className="mt-auto inline-flex items-center gap-2 text-xs uppercase tracking-[0.25em] text-gold group-hover:gap-3 transition-all">
+                Seguir perfil <ArrowRight className="h-3.5 w-3.5" />
+              </span>
             </a>
           </div>
 
-          <div className="mt-12 flex items-center justify-center gap-2 text-sm text-muted-foreground">
+          <div className="mt-14 flex items-center justify-center gap-2 text-sm text-muted-foreground">
             <MapPin className="h-4 w-4 text-gold" />
             <span>Atendimento em São Paulo e em todo o Brasil</span>
           </div>
         </div>
       </section>
 
+
       {/* FOOTER */}
       <footer className="border-t border-gold-subtle bg-surface/60">
-        <div className="mx-auto max-w-[1720px] px-6 md:px-10 lg:px-16 xl:px-24 py-20">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-14">
+        <div className="mx-auto max-w-[1720px] px-6 md:px-10 lg:px-16 xl:px-24 py-16">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mb-10">
             <div>
-              <div className="flex items-center gap-3 mb-5">
-                <img src={logo} alt="GETCARS" className="h-10 w-10 object-contain" width={40} height={40} loading="lazy" />
-                <span className="font-display text-xl tracking-[0.28em] text-gold-gradient font-semibold">GETCARS</span>
+              <div className="flex items-center gap-3 mb-4">
+                <img src={logo} alt="GETCARS" className="h-9 w-9 object-contain" width={36} height={36} loading="lazy" />
+                <span className="font-display text-lg tracking-[0.28em] text-gold-gradient font-semibold">GETCARS</span>
               </div>
-              <p className="text-muted-foreground italic font-display text-lg leading-relaxed">
-                Veículos premium, exclusivos e blindados.
+              <p className="text-muted-foreground italic font-display text-base leading-relaxed max-w-xs">
+                Veículos premium com qualidade, procedência e exclusividade.
               </p>
             </div>
+
 
             <div>
               <p className="text-[10px] tracking-[0.3em] text-gold uppercase mb-6">Navegação</p>
