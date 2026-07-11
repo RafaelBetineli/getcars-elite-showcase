@@ -214,22 +214,22 @@ function Index() {
         <div className="relative mx-auto max-w-[1720px] w-full px-6 md:px-10 lg:px-16 xl:px-24 pt-32 pb-24 max-md:pt-14 max-md:pb-28">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
             <div className="lg:col-span-6 xl:col-span-5">
-              <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full border-gold-subtle mb-10 bg-background/40 backdrop-blur max-md:px-3 max-md:py-1.5 max-md:mb-6 max-md:gap-2">
+              <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full border-gold-subtle mb-10 bg-background/40 backdrop-blur max-md:px-3 max-md:py-1.5 max-md:mb-4 max-md:gap-2">
                 <span className="h-1.5 w-1.5 rounded-full bg-gold animate-pulse max-md:h-1 max-md:w-1" />
                 <span className="text-[10px] sm:text-xs tracking-[0.3em] text-gold uppercase max-md:tracking-[0.25em]">{BADGE}</span>
               </div>
 
-              <h1 className="font-display text-[2.75rem] sm:text-6xl lg:text-7xl xl:text-[5.5rem] font-medium leading-[1.02] mb-8 tracking-tight max-md:mb-6">
+              <h1 className="font-display text-[2.75rem] sm:text-6xl lg:text-7xl xl:text-[5.5rem] font-medium leading-[1.02] mb-8 tracking-tight max-md:mb-5">
                 Veículos <span className="text-gold-gradient italic">Premium</span>,
                 <br />
                 Exclusivos e <span className="text-gold-gradient italic">Blindados</span>
               </h1>
 
-              <p className="text-lg lg:text-xl text-muted-foreground max-w-xl leading-relaxed mb-12 max-md:mb-8 max-md:text-base">
+              <p className="text-lg lg:text-xl text-muted-foreground max-w-xl leading-relaxed mb-12 max-md:mb-14 max-md:text-base">
                 Revenda especializada em veículos de alto padrão, com atendimento personalizado, qualidade e procedência.
               </p>
 
-              <div className="flex flex-col sm:flex-row gap-4 max-md:gap-3">
+              <div className="flex flex-col sm:flex-row gap-4 max-md:gap-4">
                 <a href="#veiculos" className="group inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full bg-gold-gradient text-primary-foreground font-medium tracking-wide hover:shadow-[0_0_50px_-5px_var(--gold)] transition-all">
                   Ver veículos disponíveis
                   <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
