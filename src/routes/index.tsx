@@ -500,45 +500,66 @@ function Index() {
       </section>
 
       {/* CONTATO */}
-      <section id="contato" className="py-28 lg:py-40">
-        <div className="mx-auto max-w-[1720px] px-6 md:px-10 lg:px-16 xl:px-24">
+      <section id="contato" className="py-28 lg:py-40 relative overflow-hidden">
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,oklch(0.78_0.13_80/0.06),transparent_65%)]" />
+        </div>
+        <div className="relative mx-auto max-w-[1720px] px-6 md:px-10 lg:px-16 xl:px-24">
           <div className="text-center mb-16 max-w-3xl mx-auto">
             <p className="text-[11px] tracking-[0.35em] text-gold uppercase mb-5">Contato</p>
-            <h2 className="font-display text-4xl lg:text-6xl font-medium">
-              Vamos <span className="text-gold-gradient italic">conversar</span>
+            <h2 className="font-display text-4xl lg:text-6xl font-medium leading-[1.05] mb-6">
+              Pronto para encontrar seu próximo <span className="text-gold-gradient italic">veículo premium?</span>
             </h2>
+            <p className="text-lg text-muted-foreground leading-relaxed">
+              Fale com a GETCARS para consultar veículos disponíveis, negociar seu veículo ou receber atendimento personalizado.
+            </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-            <a href={whatsappLink("Olá, GETCARS! Gostaria de falar com um consultor.")} target="_blank" rel="noopener noreferrer" className="card-premium card-premium-hover rounded-lg p-10 lg:p-12 flex items-center gap-6 group">
-              <div className="h-16 w-16 rounded-full bg-gold-gradient flex items-center justify-center shrink-0">
-                <MessageCircle className="h-7 w-7 text-primary-foreground" />
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 max-w-5xl mx-auto">
+            <a href={whatsappLink("Olá, GETCARS! Gostaria de falar com um consultor.")} target="_blank" rel="noopener noreferrer" className="card-premium card-premium-hover rounded-lg p-10 lg:p-12 flex flex-col group">
+              <div className="flex items-center gap-5 mb-6">
+                <div className="h-14 w-14 rounded-full bg-gold-gradient flex items-center justify-center shrink-0">
+                  <MessageCircle className="h-6 w-6 text-primary-foreground" />
+                </div>
+                <div>
+                  <p className="text-[10px] tracking-[0.3em] text-gold uppercase mb-1">WhatsApp</p>
+                  <p className="font-display text-2xl">Atendimento direto</p>
+                </div>
               </div>
-              <div className="min-w-0">
-                <p className="text-[10px] tracking-[0.3em] text-gold uppercase mb-1">WhatsApp</p>
-                <p className="font-display text-2xl mb-1">Atendimento direto</p>
-                <p className="text-sm text-muted-foreground truncate">Seg-Sáb · 9h às 19h</p>
-              </div>
+              <p className="text-sm text-muted-foreground leading-relaxed mb-6">
+                Atendimento direto para consultas, avaliações e negociações.
+              </p>
+              <span className="mt-auto inline-flex items-center gap-2 text-xs uppercase tracking-[0.25em] text-gold group-hover:gap-3 transition-all">
+                Iniciar conversa <ArrowRight className="h-3.5 w-3.5" />
+              </span>
             </a>
 
-            <a href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer" className="card-premium card-premium-hover rounded-lg p-10 lg:p-12 flex items-center gap-6 group">
-              <div className="h-16 w-16 rounded-full bg-gold-gradient flex items-center justify-center shrink-0">
-                <Instagram className="h-7 w-7 text-primary-foreground" />
+            <a href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer" className="card-premium card-premium-hover rounded-lg p-10 lg:p-12 flex flex-col group">
+              <div className="flex items-center gap-5 mb-6">
+                <div className="h-14 w-14 rounded-full bg-gold-gradient flex items-center justify-center shrink-0">
+                  <Instagram className="h-6 w-6 text-primary-foreground" />
+                </div>
+                <div>
+                  <p className="text-[10px] tracking-[0.3em] text-gold uppercase mb-1">Instagram</p>
+                  <p className="font-display text-2xl">@getcars_</p>
+                </div>
               </div>
-              <div className="min-w-0">
-                <p className="text-[10px] tracking-[0.3em] text-gold uppercase mb-1">Instagram</p>
-                <p className="font-display text-2xl mb-1">@getcars</p>
-                <p className="text-sm text-muted-foreground truncate">Coleção em tempo real</p>
-              </div>
+              <p className="text-sm text-muted-foreground leading-relaxed mb-6">
+                Acompanhe oportunidades, novidades e veículos em destaque.
+              </p>
+              <span className="mt-auto inline-flex items-center gap-2 text-xs uppercase tracking-[0.25em] text-gold group-hover:gap-3 transition-all">
+                Seguir perfil <ArrowRight className="h-3.5 w-3.5" />
+              </span>
             </a>
           </div>
 
-          <div className="mt-12 flex items-center justify-center gap-2 text-sm text-muted-foreground">
+          <div className="mt-14 flex items-center justify-center gap-2 text-sm text-muted-foreground">
             <MapPin className="h-4 w-4 text-gold" />
             <span>Atendimento em São Paulo e em todo o Brasil</span>
           </div>
         </div>
       </section>
+
 
       {/* FOOTER */}
       <footer className="border-t border-gold-subtle bg-surface/60">
