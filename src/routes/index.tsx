@@ -14,14 +14,15 @@ import {
   Calendar,
   Gauge,
   Shield,
+  BadgeCheck,
+  ClipboardCheck,
+  Compass,
+  KeyRound,
 } from "lucide-react";
 
 import heroCar from "@/assets/hero-car.jpg";
 import logo from "@/assets/getcars-logo.png";
-import car1 from "@/assets/car-1.jpg";
-import car2 from "@/assets/car-2.jpg";
-import car3 from "@/assets/car-3.jpg";
-import car4 from "@/assets/car-4.jpg";
+import { vehicles, type Vehicle } from "@/data/vehicles";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -45,18 +46,76 @@ const nav = [
 ];
 
 const diferenciais = [
-  { icon: ShieldCheck, title: "Procedência Garantida", text: "Avaliação técnica e documental criteriosa em todos os veículos negociados." },
-  { icon: Sparkles, title: "Atendimento Personalizado", text: "Consultoria exclusiva para conectar você ao veículo ideal ao seu perfil." },
-  { icon: Gem, title: "Premium e Blindados", text: "Curadoria de esportivos, SUVs de luxo, caminhonetes e veículos blindados." },
-  { icon: Handshake, title: "Compra, Venda e Intermediação", text: "Negociações seguras, transparentes e conduzidas com discrição absoluta." },
+  {
+    icon: ShieldCheck,
+    title: "Procedência verificada",
+    text: "Veículos selecionados com análise documental, histórico e critérios de qualidade.",
+  },
+  {
+    icon: Sparkles,
+    title: "Atendimento consultivo",
+    text: "Uma negociação personalizada, conduzida com discrição e atenção ao perfil de cada cliente.",
+  },
+  {
+    icon: Gem,
+    title: "Premium, exclusivos e blindados",
+    text: "Curadoria de esportivos, SUVs de luxo, caminhonetes premium e veículos blindados.",
+  },
+  {
+    icon: Handshake,
+    title: "Compra, venda e intermediação",
+    text: "Soluções completas para quem deseja comprar, vender ou negociar um veículo de alto padrão.",
+  },
 ];
 
-const veiculos = [
-  { img: car1, nome: "Porsche 911 Carrera T", ano: "2024", km: "7.800 km", blindagem: "PPF Full", destaque: "Esportivo · Coleção" },
-  { img: car2, nome: "Suburban High Country", ano: "2026", km: "ZERO km", blindagem: "Original de fábrica", destaque: "SUV de Luxo" },
-  { img: car3, nome: "BMW 330e", ano: "2025", km: "19.000 km", blindagem: "Original de fábrica", destaque: "Alta perfomance" },
-  { img: car4, nome: "Nivus GTS", ano: "2026", km: "6.000 km", blindagem: "Blindado Nível III", destaque: "Esportividade Ubana" },
+const etapasVenda = [
+  {
+    icon: ClipboardCheck,
+    step: "01",
+    title: "Avaliação",
+    text: "Analisamos modelo, estado, histórico, documentação e perfil comercial do veículo.",
+  },
+  {
+    icon: Compass,
+    step: "02",
+    title: "Estratégia",
+    text: "Definimos a melhor forma de negociação, venda direta ou intermediação.",
+  },
+  {
+    icon: KeyRound,
+    step: "03",
+    title: "Negociação",
+    text: "Conduzimos o contato com interessados de forma transparente, segura e personalizada.",
+  },
 ];
+
+const pilares = [
+  "Curadoria premium",
+  "Procedência e documentação",
+  "Atendimento personalizado",
+  "Negociação segura",
+];
+
+function StatusBadge({ vehicle, size = "md" }: { vehicle: Vehicle; size?: "sm" | "md" }) {
+  const Icon = vehicle.blindado ? Shield : BadgeCheck;
+  const isSm = size === "sm";
+  return (
+    <span
+      className={`inline-flex items-center gap-1.5 rounded-full bg-background/75 backdrop-blur border-gold-subtle ${
+        isSm ? "px-2.5 py-1" : "px-3.5 py-1.5"
+      }`}
+    >
+      <Icon className={isSm ? "h-3 w-3 text-gold" : "h-3.5 w-3.5 text-gold"} />
+      <span
+        className={`uppercase text-gold ${
+          isSm ? "text-[9px] tracking-wider" : "text-[10px] tracking-[0.25em]"
+        }`}
+      >
+        {vehicle.statusLabel}
+      </span>
+    </span>
+  );
+}
 
 function Index() {
   const [scrolled, setScrolled] = useState(false);
@@ -68,8 +127,8 @@ function Index() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const veiculoDestaque = veiculos[0];
-  const veiculosGrid = veiculos.slice(1);
+  const veiculoDestaque = vehicles.find((v) => v.destaque) ?? vehicles[0];
+  const veiculosGrid = vehicles.filter((v) => v.id !== veiculoDestaque.id);
 
   return (
     <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
@@ -118,7 +177,6 @@ function Index() {
 
       {/* HERO */}
       <section id="inicio" className="relative min-h-screen flex items-center overflow-hidden">
-        {/* Background image full width, positioned right */}
         <div className="absolute inset-0">
           <img
             src={heroCar}
@@ -127,11 +185,9 @@ function Index() {
             width={1920}
             height={1080}
           />
-          {/* Cinematic overlays */}
           <div className="absolute inset-0 bg-gradient-to-r from-background via-background/85 md:via-background/70 to-transparent" />
           <div className="absolute inset-0 bg-gradient-to-t from-background via-background/30 to-background/60" />
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_left,oklch(0.08_0.005_60/0.6),transparent_60%)]" />
-          {/* Grain-like subtle vignette */}
           <div className="absolute inset-0 bg-gradient-to-b from-background/60 via-transparent to-background/80" />
         </div>
 
@@ -166,7 +222,6 @@ function Index() {
             </div>
           </div>
 
-          {/* Bottom scroll indicator / meta */}
           <div className="absolute left-6 md:left-10 lg:left-16 xl:left-24 right-6 md:right-10 lg:right-16 xl:right-24 bottom-8 hidden md:flex items-end justify-between text-[10px] tracking-[0.3em] uppercase text-muted-foreground/70">
             <div className="flex items-center gap-3">
               <span className="h-px w-10 bg-gold/50" />
@@ -180,44 +235,63 @@ function Index() {
         </div>
       </section>
 
-      {/* DIFERENCIAIS */}
+      {/* DIFERENCIAIS — editorial */}
       <section className="py-28 lg:py-40 relative">
         <div className="mx-auto max-w-[1720px] px-6 md:px-10 lg:px-16 xl:px-24">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 mb-20 items-end">
-            <div className="lg:col-span-6">
-              <p className="text-[11px] tracking-[0.35em] text-gold uppercase mb-5">Nossos Diferenciais</p>
-              <h2 className="font-display text-4xl lg:text-6xl font-medium leading-[1.05]">
-                A experiência de quem <span className="text-gold-gradient italic">exige o melhor</span>
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-14 lg:gap-20">
+            {/* Editorial column */}
+            <div className="lg:col-span-5 lg:sticky lg:top-32 self-start">
+              <p className="text-[11px] tracking-[0.35em] text-gold uppercase mb-6">A experiência GETCARS</p>
+              <h2 className="font-display text-4xl lg:text-5xl xl:text-6xl font-medium leading-[1.05] mb-8">
+                Uma experiência premium do <span className="text-gold-gradient italic">primeiro contato</span> à entrega
               </h2>
-            </div>
-            <div className="lg:col-span-5 lg:col-start-8">
-              <p className="text-lg text-muted-foreground leading-relaxed">
-                Cada etapa da negociação é conduzida com discrição, transparência e um cuidado que só uma revenda especializada em veículos premium pode oferecer.
+              <p className="text-lg text-muted-foreground leading-relaxed mb-10">
+                Cada veículo é tratado com critério, cada negociação com transparência e cada cliente com atendimento personalizado.
               </p>
-            </div>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-gold/10 rounded-lg overflow-hidden border-gold-subtle">
-            {diferenciais.map((d, i) => (
-              <div
-                key={d.title}
-                className="bg-background hover:bg-surface/60 transition-colors duration-500 p-10 lg:p-14 group relative"
-              >
-                <div className="flex items-start gap-6">
-                  <div className="shrink-0 h-16 w-16 rounded-full border-gold-subtle flex items-center justify-center group-hover:bg-gold/10 group-hover:border-gold/60 transition-all duration-500">
-                    <d.icon className="h-6 w-6 text-gold" />
-                  </div>
-                  <div className="min-w-0 flex-1">
-                    <div className="flex items-center gap-3 mb-3">
-                      <span className="text-[10px] tracking-[0.3em] text-gold/60 uppercase">0{i + 1}</span>
-                      <span className="h-px flex-1 bg-gold/20" />
-                    </div>
-                    <h3 className="font-display text-2xl lg:text-3xl mb-3 text-foreground">{d.title}</h3>
-                    <p className="text-[15px] text-muted-foreground leading-relaxed">{d.text}</p>
-                  </div>
+              <div className="hidden lg:block relative aspect-[4/5] rounded-lg overflow-hidden border-gold-subtle">
+                <img
+                  src={heroCar}
+                  alt="Detalhe automotivo premium"
+                  loading="lazy"
+                  className="h-full w-full object-cover object-[60%_center] grayscale-[20%]"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent" />
+                <div className="absolute bottom-6 left-6 right-6">
+                  <p className="text-[10px] tracking-[0.35em] uppercase text-gold mb-2">Critério · Discrição · Padrão</p>
+                  <p className="font-display text-xl text-foreground/90 leading-snug">
+                    Cada detalhe é parte de uma experiência pensada para quem exige o melhor.
+                  </p>
                 </div>
               </div>
-            ))}
+            </div>
+
+            {/* Diferenciais column — asymmetric stack */}
+            <div className="lg:col-span-7 space-y-6">
+              {diferenciais.map((d, i) => (
+                <div
+                  key={d.title}
+                  className={`group relative rounded-lg border-gold-subtle bg-surface/40 hover:bg-surface/70 transition-all duration-500 p-8 lg:p-10 ${
+                    i % 2 === 0 ? "lg:ml-0 lg:mr-8" : "lg:ml-12 lg:mr-0"
+                  }`}
+                >
+                  <div className="flex items-start gap-6">
+                    <div className="shrink-0 h-14 w-14 rounded-full border-gold-subtle flex items-center justify-center group-hover:bg-gold/10 group-hover:border-gold/60 transition-all duration-500">
+                      <d.icon className="h-5 w-5 text-gold" />
+                    </div>
+                    <div className="min-w-0 flex-1">
+                      <div className="flex items-center gap-3 mb-3">
+                        <span className="text-[10px] tracking-[0.3em] text-gold/70 uppercase">0{i + 1}</span>
+                        <span className="h-px flex-1 bg-gold/15" />
+                      </div>
+                      <h3 className="font-display text-2xl lg:text-3xl mb-3 text-foreground leading-tight">
+                        {d.title}
+                      </h3>
+                      <p className="text-[15px] text-muted-foreground leading-relaxed">{d.text}</p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
@@ -225,37 +299,32 @@ function Index() {
       {/* VEÍCULOS */}
       <section id="veiculos" className="py-28 lg:py-40 bg-surface/40 border-y border-gold-subtle relative">
         <div className="mx-auto max-w-[1720px] px-6 md:px-10 lg:px-16 xl:px-24">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 mb-16 items-end">
-            <div className="lg:col-span-7">
-              <p className="text-[11px] tracking-[0.35em] text-gold uppercase mb-5">Coleção em destaque</p>
-              <h2 className="font-display text-4xl lg:text-6xl font-medium leading-[1.05]">
-                Veículos em <span className="text-gold-gradient italic">destaque</span>
-              </h2>
-            </div>
-            <div className="lg:col-span-5">
-              <p className="text-muted-foreground leading-relaxed">
-                Uma curadoria exclusiva, atualizada semanalmente, com procedência verificada e veículos preparados para entrega imediata.
+          <div className="max-w-4xl mb-16 lg:mb-20">
+            <p className="text-[11px] tracking-[0.35em] text-gold uppercase mb-5">Coleção em destaque</p>
+            <h2 className="font-display text-4xl lg:text-6xl font-medium leading-[1.05] mb-8">
+              Veículos em <span className="text-gold-gradient italic">destaque</span>
+            </h2>
+            <p className="text-lg text-muted-foreground leading-relaxed mb-8 max-w-3xl">
+              Uma seleção de veículos premium, exclusivos e blindados, escolhidos com foco em qualidade, procedência e oportunidade.
+            </p>
+            <div className="max-w-3xl border-l-2 border-gold/50 pl-5 py-1">
+              <p className="text-sm text-muted-foreground/85 italic leading-relaxed">
+                Os valores são informados mediante consulta para garantir uma negociação personalizada, considerando forma de pagamento, troca, financiamento e condições comerciais.
               </p>
             </div>
           </div>
 
-          <p className="text-sm text-muted-foreground/80 italic max-w-4xl mb-16 leading-relaxed border-l-2 border-gold/40 pl-5">
-            Os valores são informados mediante consulta para garantir uma negociação personalizada, considerando forma de pagamento, troca, financiamento e condições comerciais.
-          </p>
-
-          {/* Editorial layout: 1 hero card + grid */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
             {/* Featured car */}
             <article className="lg:col-span-7 card-premium card-premium-hover rounded-lg overflow-hidden group flex flex-col">
               <div className="relative aspect-[16/11] overflow-hidden bg-black">
                 <img src={veiculoDestaque.img} alt={veiculoDestaque.nome} loading="lazy" width={1600} height={1100} className="h-full w-full object-cover transition-transform duration-[1200ms] group-hover:scale-105" />
                 <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/20 to-transparent" />
-                <div className="absolute top-6 left-6 inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-background/70 backdrop-blur border-gold-subtle">
-                  <Shield className="h-3.5 w-3.5 text-gold" />
-                  <span className="text-[10px] tracking-[0.25em] uppercase text-gold">{veiculoDestaque.blindagem}</span>
+                <div className="absolute top-6 left-6">
+                  <StatusBadge vehicle={veiculoDestaque} />
                 </div>
                 <div className="absolute top-6 right-6 text-[10px] tracking-[0.3em] uppercase text-gold/80">
-                  {veiculoDestaque.destaque}
+                  {veiculoDestaque.categoria}
                 </div>
                 <div className="absolute bottom-6 left-6 right-6">
                   <p className="text-[10px] tracking-[0.3em] uppercase text-gold mb-2">Destaque da semana</p>
@@ -271,7 +340,7 @@ function Index() {
                   </div>
                 </div>
                 <a
-                  href={whatsappLink(`Olá, GETCARS! Tenho interesse no ${veiculoDestaque.nome} e gostaria de receber mais informações.`)}
+                  href={whatsappLink(veiculoDestaque.whatsappMensagem)}
                   target="_blank" rel="noopener noreferrer"
                   className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full bg-gold-gradient text-primary-foreground text-sm font-medium tracking-wide hover:shadow-[0_0_40px_-8px_var(--gold)] transition-all shrink-0"
                 >
@@ -285,16 +354,15 @@ function Index() {
             {/* Side grid */}
             <div className="lg:col-span-5 grid grid-cols-1 gap-8">
               {veiculosGrid.map((v) => (
-                <article key={v.nome} className="card-premium card-premium-hover rounded-lg overflow-hidden group grid grid-cols-1 sm:grid-cols-2">
+                <article key={v.id} className="card-premium card-premium-hover rounded-lg overflow-hidden group grid grid-cols-1 sm:grid-cols-2">
                   <div className="relative aspect-[4/3] sm:aspect-auto overflow-hidden bg-black">
                     <img src={v.img} alt={v.nome} loading="lazy" width={800} height={600} className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" />
-                    <div className="absolute top-3 left-3 inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-background/80 backdrop-blur border-gold-subtle">
-                      <Shield className="h-3 w-3 text-gold" />
-                      <span className="text-[9px] tracking-wider uppercase text-gold">{v.blindagem}</span>
+                    <div className="absolute top-3 left-3">
+                      <StatusBadge vehicle={v} size="sm" />
                     </div>
                   </div>
                   <div className="p-6 flex flex-col">
-                    <p className="text-[10px] tracking-[0.25em] uppercase text-gold/70 mb-2">{v.destaque}</p>
+                    <p className="text-[10px] tracking-[0.25em] uppercase text-gold/70 mb-2">{v.categoria}</p>
                     <h3 className="font-display text-xl lg:text-2xl mb-2 leading-tight">{v.nome}</h3>
                     <p className="text-gold-soft text-xs tracking-wide mb-4">Valor mediante consulta</p>
                     <div className="flex flex-wrap gap-4 mb-5 text-xs text-muted-foreground">
@@ -302,7 +370,7 @@ function Index() {
                       <div className="flex items-center gap-1.5"><Gauge className="h-3.5 w-3.5 text-gold" />{v.km}</div>
                     </div>
                     <a
-                      href={whatsappLink(`Olá, GETCARS! Tenho interesse no ${v.nome} e gostaria de receber mais informações.`)}
+                      href={whatsappLink(v.whatsappMensagem)}
                       target="_blank" rel="noopener noreferrer"
                       className="mt-auto inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-full border-gold-subtle text-gold text-xs uppercase tracking-[0.15em] hover:bg-gold hover:text-primary-foreground transition-all"
                     >
@@ -317,32 +385,60 @@ function Index() {
         </div>
       </section>
 
-      {/* VENDA */}
+      {/* VENDA — serviço premium */}
       <section id="venda" className="py-28 lg:py-40 relative overflow-hidden">
-        <div className="mx-auto max-w-[1720px] px-6 md:px-10 lg:px-16 xl:px-24">
-          <div className="relative rounded-lg overflow-hidden border-gold-subtle">
-            <div className="absolute inset-0">
-              <img src={heroCar} alt="" className="h-full w-full object-cover object-center opacity-40" loading="lazy" />
-              <div className="absolute inset-0 bg-gradient-to-r from-background via-background/90 to-background/40" />
-              <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_left,oklch(0.78_0.13_80/0.15),transparent_55%)]" />
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,oklch(0.78_0.13_80/0.08),transparent_60%)]" />
+        </div>
+        <div className="relative mx-auto max-w-[1720px] px-6 md:px-10 lg:px-16 xl:px-24">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-14 mb-16 lg:mb-20 items-end">
+            <div className="lg:col-span-7">
+              <p className="text-[11px] tracking-[0.35em] text-gold uppercase mb-5">Avaliação · Intermediação</p>
+              <h2 className="font-display text-4xl lg:text-6xl font-medium leading-[1.05]">
+                Seu veículo premium em uma <span className="text-gold-gradient italic">negociação à altura</span>
+              </h2>
             </div>
+            <div className="lg:col-span-5">
+              <p className="text-lg text-muted-foreground leading-relaxed">
+                A GETCARS auxilia proprietários que desejam vender, trocar ou intermediar veículos de alto padrão com segurança, discrição e posicionamento adequado.
+              </p>
+            </div>
+          </div>
 
-            <div className="relative grid grid-cols-1 lg:grid-cols-12 gap-10 p-10 md:p-16 lg:p-24 items-center min-h-[520px]">
-              <div className="lg:col-span-7">
-                <p className="text-[11px] tracking-[0.35em] text-gold uppercase mb-5">Avaliação Premium</p>
-                <h2 className="font-display text-4xl lg:text-6xl font-medium mb-8 leading-[1.05]">
-                  Venda ou negocie seu <span className="text-gold-gradient italic">veículo premium</span>
-                </h2>
-                <p className="text-lg text-muted-foreground max-w-2xl mb-10 leading-relaxed">
-                  A GETCARS avalia veículos de alto padrão e oferece uma negociação transparente, segura e personalizada.
-                </p>
-                <a href={whatsappLink("Olá, GETCARS! Gostaria de vender meu veículo e solicitar uma avaliação.")} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-3 px-9 py-4 rounded-full bg-gold-gradient text-primary-foreground font-medium tracking-wide hover:shadow-[0_0_50px_-5px_var(--gold)] transition-all">
-                  <MessageCircle className="h-5 w-5" />
-                  Solicitar avaliação
-                  <ArrowRight className="h-4 w-4" />
-                </a>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 mb-14">
+            {etapasVenda.map((e) => (
+              <div
+                key={e.step}
+                className="group rounded-lg border-gold-subtle bg-surface/50 hover:bg-surface/80 transition-all duration-500 p-8 lg:p-10 flex flex-col"
+              >
+                <div className="flex items-center justify-between mb-8">
+                  <div className="h-12 w-12 rounded-full border-gold-subtle flex items-center justify-center group-hover:bg-gold/10 group-hover:border-gold/60 transition-all">
+                    <e.icon className="h-5 w-5 text-gold" />
+                  </div>
+                  <span className="font-display text-4xl text-gold-gradient">{e.step}</span>
+                </div>
+                <h3 className="font-display text-2xl lg:text-3xl mb-3 leading-tight">{e.title}</h3>
+                <p className="text-[15px] text-muted-foreground leading-relaxed">{e.text}</p>
               </div>
-            </div>
+            ))}
+          </div>
+
+          <div className="flex flex-col sm:flex-row gap-4">
+            <a
+              href={whatsappLink("Olá, GETCARS! Gostaria de solicitar uma avaliação para o meu veículo.")}
+              target="_blank" rel="noopener noreferrer"
+              className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full bg-gold-gradient text-primary-foreground font-medium tracking-wide hover:shadow-[0_0_50px_-5px_var(--gold)] transition-all"
+            >
+              Solicitar avaliação
+              <ArrowRight className="h-4 w-4" />
+            </a>
+            <a
+              href={whatsappLink("Olá, GETCARS! Gostaria de entender como funciona a intermediação de veículos.")}
+              target="_blank" rel="noopener noreferrer"
+              className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full border-gold-subtle text-gold hover:bg-gold hover:text-primary-foreground transition-all"
+            >
+              Entender como funciona
+            </a>
           </div>
         </div>
       </section>
@@ -350,31 +446,33 @@ function Index() {
       {/* SOBRE */}
       <section id="sobre" className="py-28 lg:py-40 bg-surface/40 border-y border-gold-subtle">
         <div className="mx-auto max-w-[1720px] px-6 md:px-10 lg:px-16 xl:px-24">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-14 lg:gap-20 mb-16 lg:mb-24">
             <div className="lg:col-span-5">
               <p className="text-[11px] tracking-[0.35em] text-gold uppercase mb-5">Sobre a GETCARS</p>
-              <h2 className="font-display text-4xl lg:text-6xl font-medium leading-[1.05]">
-                Uma revenda para quem <span className="text-gold-gradient italic">reconhece valor</span>
+              <h2 className="font-display text-4xl lg:text-5xl xl:text-6xl font-medium leading-[1.05]">
+                Uma revenda para quem valoriza <span className="text-gold-gradient italic">procedência, discrição e alto padrão</span>
               </h2>
             </div>
-            <div className="lg:col-span-7 space-y-8 text-lg text-muted-foreground leading-relaxed">
+            <div className="lg:col-span-7 space-y-7 text-lg text-muted-foreground leading-relaxed">
               <p>
-                A <span className="text-gold-soft">GETCARS</span> é uma revenda especializada em compra, venda e intermediação de veículos premium, exclusivos e blindados. Nosso compromisso é oferecer uma experiência segura, transparente e personalizada para clientes que buscam veículos diferenciados, com qualidade e procedência.
+                A <span className="text-gold-soft">GETCARS</span> atua na compra, venda e intermediação de veículos premium, exclusivos e blindados, oferecendo uma experiência segura, transparente e personalizada para clientes que buscam veículos diferenciados.
               </p>
               <p>
-                Atuamos com atendimento consultivo, negociação personalizada e suporte completo durante o processo de compra ou venda.
+                Mais do que apresentar veículos, nosso trabalho é conduzir cada negociação com critério, atenção aos detalhes e suporte completo durante todo o processo de compra ou venda.
               </p>
-              <div className="grid grid-cols-2 gap-8 pt-6 border-t border-gold-subtle">
-                <div>
-                  <p className="font-display text-4xl text-gold-gradient mb-1">+10 anos</p>
-                  <p className="text-sm">de mercado premium</p>
-                </div>
-                <div>
-                  <p className="font-display text-4xl text-gold-gradient mb-1">100%</p>
-                  <p className="text-sm">procedência verificada</p>
-                </div>
-              </div>
             </div>
+          </div>
+
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-px bg-gold/10 border-gold-subtle rounded-lg overflow-hidden">
+            {pilares.map((p, i) => (
+              <div
+                key={p}
+                className="bg-background/60 p-8 lg:p-10 flex flex-col justify-between min-h-[180px] group hover:bg-surface/70 transition-colors duration-500"
+              >
+                <span className="text-[10px] tracking-[0.35em] text-gold/70 uppercase">0{i + 1}</span>
+                <p className="font-display text-xl lg:text-2xl leading-tight text-foreground">{p}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -415,7 +513,7 @@ function Index() {
 
           <div className="mt-12 flex items-center justify-center gap-2 text-sm text-muted-foreground">
             <MapPin className="h-4 w-4 text-gold" />
-            <span>Showroom em São Paulo · Atendimento em todo o Brasil</span>
+            <span>Atendimento em São Paulo e em todo o Brasil</span>
           </div>
         </div>
       </section>
