@@ -27,8 +27,8 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 
-const WHATSAPP_NUMBER = "5511999999999";
-const INSTAGRAM_URL = "https://instagram.com/getcars";
+const WHATSAPP_NUMBER = "5511997292805";
+const INSTAGRAM_URL = "https://instagram.com/getcars_/";
 const BADGE = "Revenda Especializada em Veículos Premium";
 
 function whatsappLink(mensagem?: string) {
@@ -52,10 +52,10 @@ const diferenciais = [
 ];
 
 const veiculos = [
-  { img: car1, nome: "Porsche 911 Turbo S", ano: "2023", km: "8.400 km", blindagem: "Blindado Nível III-A", destaque: "Esportivo · Coleção" },
-  { img: car2, nome: "Range Rover Autobiography", ano: "2024", km: "12.100 km", blindagem: "Blindado Nível III-A", destaque: "SUV de Luxo" },
-  { img: car3, nome: "Mercedes-Benz G63 AMG", ano: "2023", km: "15.700 km", blindagem: "Original de fábrica", destaque: "Ícone off-road" },
-  { img: car4, nome: "BMW M5 Competition", ano: "2022", km: "22.300 km", blindagem: "Blindado Nível III-A", destaque: "Alta performance" },
+  { img: car1, nome: "Porsche 911 Carrera T", ano: "2024", km: "7.800 km", blindagem: "PPF Full", destaque: "Esportivo · Coleção" },
+  { img: car2, nome: "Suburban High Country", ano: "2026", km: "ZERO km", blindagem: "Original de fábrica", destaque: "SUV de Luxo" },
+  { img: car3, nome: "BMW 330e", ano: "2025", km: "19.000 km", blindagem: "Original de fábrica", destaque: "Alta perfomance" },
+  { img: car4, nome: "Nivus GTS", ano: "2026", km: "6.000 km", blindagem: "Blindado Nível III", destaque: "Esportividade Ubana" },
 ];
 
 function Index() {
