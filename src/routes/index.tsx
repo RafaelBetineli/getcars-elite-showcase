@@ -473,17 +473,29 @@ function Index() {
             </div>
           </div>
 
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-px bg-gold/10 border-gold-subtle rounded-lg overflow-hidden">
+          <div className="mb-10 flex items-center gap-4">
+            <span className="h-px w-10 bg-gold/50" />
+            <p className="text-[11px] tracking-[0.35em] text-gold uppercase">O padrão GETCARS</p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
             {pilares.map((p, i) => (
               <div
-                key={p}
-                className="bg-background/60 p-8 lg:p-10 flex flex-col justify-between min-h-[180px] group hover:bg-surface/70 transition-colors duration-500"
+                key={p.title}
+                className="group relative rounded-lg border-gold-subtle bg-background/50 hover:bg-surface/70 transition-all duration-500 p-8 lg:p-10 flex flex-col min-h-[240px]"
               >
-                <span className="text-[10px] tracking-[0.35em] text-gold/70 uppercase">0{i + 1}</span>
-                <p className="font-display text-xl lg:text-2xl leading-tight text-foreground">{p}</p>
+                <div className="flex items-center justify-between mb-8">
+                  <div className="h-12 w-12 rounded-full border-gold-subtle flex items-center justify-center group-hover:bg-gold/10 group-hover:border-gold/60 transition-all">
+                    <p.icon className="h-5 w-5 text-gold" />
+                  </div>
+                  <span className="text-[10px] tracking-[0.35em] text-gold/60 uppercase">0{i + 1}</span>
+                </div>
+                <h3 className="font-display text-xl lg:text-2xl mb-3 leading-tight text-foreground">{p.title}</h3>
+                <p className="text-sm text-muted-foreground leading-relaxed">{p.text}</p>
               </div>
             ))}
           </div>
+
         </div>
       </section>
 
