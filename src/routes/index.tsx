@@ -256,7 +256,7 @@ function Index() {
       </section>
 
       {/* JORNADA GETCARS — timeline editorial */}
-      <section className="py-20 lg:py-28 relative">
+      <section className="py-10 md:py-20 lg:py-28 relative">
         <div className="mx-auto max-w-[1720px] px-6 md:px-10 lg:px-16 xl:px-24">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
             {/* Editorial column */}
