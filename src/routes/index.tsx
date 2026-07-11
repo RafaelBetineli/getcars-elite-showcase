@@ -216,7 +216,7 @@ function Index() {
             <div className="lg:col-span-6 xl:col-span-5">
               <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full border-gold-subtle mb-10 bg-background/40 backdrop-blur max-md:px-3 max-md:py-1.5 max-md:mb-6 max-md:gap-2">
                 <span className="h-1.5 w-1.5 rounded-full bg-gold animate-pulse max-md:h-1 max-md:w-1" />
-                <span className="text-[10px] sm:text-xs tracking-[0.3em] text-gold uppercase max-md:text-[9px] max-md:tracking-[0.25em]">{BADGE}</span>
+                <span className="text-[10px] sm:text-xs tracking-[0.3em] text-gold uppercase max-md:tracking-[0.25em]">{BADGE}</span>
               </div>
 
               <h1 className="font-display text-[2.75rem] sm:text-6xl lg:text-7xl xl:text-[5.5rem] font-medium leading-[1.02] mb-8 tracking-tight max-md:mb-6">
