@@ -45,26 +45,30 @@ const nav = [
   { label: "Contato", href: "#contato" },
 ];
 
-const diferenciais = [
-  {
-    icon: ShieldCheck,
-    title: "Procedência verificada",
-    text: "Veículos selecionados com análise documental, histórico e critérios de qualidade.",
-  },
-  {
-    icon: Sparkles,
-    title: "Atendimento consultivo",
-    text: "Uma negociação personalizada, conduzida com discrição e atenção ao perfil de cada cliente.",
-  },
+const jornada = [
   {
     icon: Gem,
-    title: "Premium, exclusivos e blindados",
-    text: "Curadoria de esportivos, SUVs de luxo, caminhonetes premium e veículos blindados.",
+    step: "01",
+    title: "Curadoria",
+    text: "Selecionamos veículos premium com foco em qualidade, perfil comercial e oportunidade.",
+  },
+  {
+    icon: ShieldCheck,
+    step: "02",
+    title: "Procedência",
+    text: "Analisamos documentação, histórico e critérios essenciais para uma negociação segura.",
   },
   {
     icon: Handshake,
-    title: "Compra, venda e intermediação",
-    text: "Soluções completas para quem deseja comprar, vender ou negociar um veículo de alto padrão.",
+    step: "03",
+    title: "Negociação",
+    text: "Conduzimos cada etapa com transparência, discrição e atenção ao perfil do cliente.",
+  },
+  {
+    icon: KeyRound,
+    step: "04",
+    title: "Entrega",
+    text: "Oferecemos suporte até a conclusão do processo de compra, venda ou intermediação.",
   },
 ];
 
@@ -79,7 +83,7 @@ const etapasVenda = [
     icon: Compass,
     step: "02",
     title: "Estratégia",
-    text: "Definimos a melhor forma de negociação, venda direta ou intermediação.",
+    text: "Definimos a melhor forma de negociação, seja venda direta, troca ou intermediação.",
   },
   {
     icon: KeyRound,
@@ -90,14 +94,30 @@ const etapasVenda = [
 ];
 
 const pilares = [
-  "Curadoria premium",
-  "Procedência e documentação",
-  "Atendimento personalizado",
-  "Negociação segura",
+  {
+    icon: Gem,
+    title: "Curadoria premium",
+    text: "Veículos selecionados com atenção ao perfil, estado e oportunidade.",
+  },
+  {
+    icon: ShieldCheck,
+    title: "Procedência e documentação",
+    text: "Análise criteriosa para garantir mais segurança em cada negociação.",
+  },
+  {
+    icon: Sparkles,
+    title: "Atendimento personalizado",
+    text: "Contato direto, consultivo e adaptado ao objetivo de cada cliente.",
+  },
+  {
+    icon: Handshake,
+    title: "Negociação segura",
+    text: "Processo conduzido com clareza, discrição e suporte até a conclusão.",
+  },
 ];
 
 function StatusBadge({ vehicle, size = "md" }: { vehicle: Vehicle; size?: "sm" | "md" }) {
-  const Icon = vehicle.blindado ? Shield : BadgeCheck;
+  const Icon = vehicle.statusType === "armored" ? Shield : BadgeCheck;
   const isSm = size === "sm";
   return (
     <span
