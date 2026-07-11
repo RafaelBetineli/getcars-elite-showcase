@@ -255,13 +255,13 @@ function Index() {
         </div>
       </section>
 
-      {/* DIFERENCIAIS — editorial */}
+      {/* JORNADA GETCARS — timeline editorial */}
       <section className="py-28 lg:py-40 relative">
         <div className="mx-auto max-w-[1720px] px-6 md:px-10 lg:px-16 xl:px-24">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-14 lg:gap-20">
             {/* Editorial column */}
             <div className="lg:col-span-5 lg:sticky lg:top-32 self-start">
-              <p className="text-[11px] tracking-[0.35em] text-gold uppercase mb-6">A experiência GETCARS</p>
+              <p className="text-[11px] tracking-[0.35em] text-gold uppercase mb-6">A jornada GETCARS</p>
               <h2 className="font-display text-4xl lg:text-5xl xl:text-6xl font-medium leading-[1.05] mb-8">
                 Uma experiência premium do <span className="text-gold-gradient italic">primeiro contato</span> à entrega
               </h2>
@@ -273,48 +273,38 @@ function Index() {
                   src={heroCar}
                   alt="Detalhe automotivo premium"
                   loading="lazy"
-                  className="h-full w-full object-cover object-[60%_center] grayscale-[20%]"
+                  className="h-full w-full object-cover object-[60%_center] grayscale-[15%]"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent" />
-                <div className="absolute bottom-6 left-6 right-6">
-                  <p className="text-[10px] tracking-[0.35em] uppercase text-gold mb-2">Critério · Discrição · Padrão</p>
-                  <p className="font-display text-xl text-foreground/90 leading-snug">
-                    Cada detalhe é parte de uma experiência pensada para quem exige o melhor.
-                  </p>
-                </div>
+                <div className="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-transparent" />
               </div>
             </div>
 
-            {/* Diferenciais column — asymmetric stack */}
-            <div className="lg:col-span-7 space-y-6">
-              {diferenciais.map((d, i) => (
-                <div
-                  key={d.title}
-                  className={`group relative rounded-lg border-gold-subtle bg-surface/40 hover:bg-surface/70 transition-all duration-500 p-8 lg:p-10 ${
-                    i % 2 === 0 ? "lg:ml-0 lg:mr-8" : "lg:ml-12 lg:mr-0"
-                  }`}
-                >
-                  <div className="flex items-start gap-6">
-                    <div className="shrink-0 h-14 w-14 rounded-full border-gold-subtle flex items-center justify-center group-hover:bg-gold/10 group-hover:border-gold/60 transition-all duration-500">
-                      <d.icon className="h-5 w-5 text-gold" />
+            {/* Timeline column */}
+            <div className="lg:col-span-7 relative">
+              <div className="absolute left-6 lg:left-7 top-3 bottom-3 w-px bg-gradient-to-b from-gold/40 via-gold/15 to-transparent" aria-hidden />
+              <ol className="space-y-10 lg:space-y-14">
+                {jornada.map((j) => (
+                  <li key={j.step} className="relative pl-20 lg:pl-24 group">
+                    <div className="absolute left-0 top-0 h-12 w-12 lg:h-14 lg:w-14 rounded-full border-gold-subtle bg-background flex items-center justify-center group-hover:border-gold/60 group-hover:bg-gold/5 transition-all duration-500">
+                      <j.icon className="h-5 w-5 text-gold" />
                     </div>
-                    <div className="min-w-0 flex-1">
-                      <div className="flex items-center gap-3 mb-3">
-                        <span className="text-[10px] tracking-[0.3em] text-gold/70 uppercase">0{i + 1}</span>
-                        <span className="h-px flex-1 bg-gold/15" />
-                      </div>
-                      <h3 className="font-display text-2xl lg:text-3xl mb-3 text-foreground leading-tight">
-                        {d.title}
-                      </h3>
-                      <p className="text-[15px] text-muted-foreground leading-relaxed">{d.text}</p>
+                    <div className="flex items-center gap-3 mb-2">
+                      <span className="text-[10px] tracking-[0.35em] text-gold/70 uppercase">{j.step}</span>
+                      <span className="h-px w-10 bg-gold/25" />
                     </div>
-                  </div>
-                </div>
-              ))}
+                    <h3 className="font-display text-2xl lg:text-3xl mb-3 text-foreground leading-tight">
+                      {j.title}
+                    </h3>
+                    <p className="text-[15px] text-muted-foreground leading-relaxed max-w-xl">{j.text}</p>
+                  </li>
+                ))}
+              </ol>
             </div>
           </div>
         </div>
       </section>
+
+
 
       {/* VEÍCULOS */}
       <section id="veiculos" className="py-28 lg:py-40 bg-surface/40 border-y border-gold-subtle relative">
