@@ -140,6 +140,19 @@ function StatusBadge({ vehicle, size = "md" }: { vehicle: Vehicle; size?: "sm" |
 function Index() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [comoFuncionaOpen, setComoFuncionaOpen] = useState(false);
+
+  useEffect(() => {
+    if (!comoFuncionaOpen) return;
+    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setComoFuncionaOpen(false);
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    window.addEventListener("keydown", onKey);
+    return () => {
+      document.body.style.overflow = prev;
+      window.removeEventListener("keydown", onKey);
+    };
+  }, [comoFuncionaOpen]);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -445,13 +458,13 @@ function Index() {
               Solicitar avaliação
               <ArrowRight className="h-4 w-4" />
             </a>
-            <a
-              href={whatsappLink("Olá, GETCARS! Gostaria de entender como funciona a intermediação de veículos.")}
-              target="_blank" rel="noopener noreferrer"
+            <button
+              type="button"
+              onClick={() => setComoFuncionaOpen(true)}
               className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full border-gold-subtle text-gold hover:bg-gold hover:text-primary-foreground transition-all"
             >
               Entender como funciona
-            </a>
+            </button>
           </div>
         </div>
       </section>
@@ -604,6 +617,81 @@ function Index() {
           </div>
         </div>
       </footer>
+
+      {/* MODAL: Como funciona a avaliação */}
+      {comoFuncionaOpen && (
+        <div
+          className="fixed inset-0 z-[100] flex items-end sm:items-center justify-center"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="como-funciona-title"
+        >
+          <div
+            className="absolute inset-0 bg-background/85 backdrop-blur-sm"
+            onClick={() => setComoFuncionaOpen(false)}
+          />
+          <div className="relative w-full sm:max-w-2xl max-h-[92vh] overflow-y-auto bg-surface border border-gold/25 shadow-[0_0_80px_-10px_var(--gold)] rounded-t-2xl sm:rounded-2xl animate-in fade-in slide-in-from-bottom-4 duration-300">
+            <div className="sticky top-0 z-10 flex items-center justify-between px-6 sm:px-10 py-5 border-b border-gold-subtle bg-surface/95 backdrop-blur">
+              <p className="text-[11px] tracking-[0.35em] text-gold uppercase">Processo GETCARS</p>
+              <button
+                type="button"
+                onClick={() => setComoFuncionaOpen(false)}
+                className="h-9 w-9 rounded-full border-gold-subtle flex items-center justify-center text-gold hover:bg-gold hover:text-primary-foreground transition-all"
+                aria-label="Fechar"
+              >
+                <X className="h-4 w-4" />
+              </button>
+            </div>
+
+            <div className="px-6 sm:px-10 py-8 sm:py-10">
+              <h3 id="como-funciona-title" className="font-display text-3xl sm:text-4xl leading-tight mb-4">
+                Como funciona a <span className="text-gold-gradient italic">avaliação</span>
+              </h3>
+              <p className="text-[15px] text-muted-foreground leading-relaxed mb-8">
+                Entenda como a GETCARS conduz a avaliação, negociação e intermediação de veículos premium com segurança, transparência e discrição.
+              </p>
+
+              <ol className="space-y-6">
+                {[
+                  { t: "Primeiro contato", d: "Você informa o modelo, ano, versão, quilometragem e envia algumas fotos do veículo." },
+                  { t: "Análise do veículo", d: "A GETCARS avalia o perfil do carro, estado geral, documentação, histórico e potencial comercial." },
+                  { t: "Estratégia de negociação", d: "Definimos a melhor forma de conduzir: venda direta, troca ou intermediação." },
+                  { t: "Atendimento e proposta", d: "A negociação é conduzida com transparência, discrição e suporte até a conclusão." },
+                ].map((item, i) => (
+                  <li key={item.t} className="flex gap-5">
+                    <div className="flex-shrink-0 h-10 w-10 rounded-full border-gold-subtle flex items-center justify-center">
+                      <span className="font-display text-lg text-gold-gradient">{i + 1}</span>
+                    </div>
+                    <div className="pt-1">
+                      <h4 className="font-display text-xl mb-1.5 leading-tight">{item.t}</h4>
+                      <p className="text-[14px] text-muted-foreground leading-relaxed">{item.d}</p>
+                    </div>
+                  </li>
+                ))}
+              </ol>
+
+              <div className="mt-10 pt-6 border-t border-gold-subtle/50 flex flex-col sm:flex-row gap-3">
+                <a
+                  href={whatsappLink("Olá, GETCARS! Gostaria de solicitar uma avaliação para o meu veículo.")}
+                  target="_blank" rel="noopener noreferrer"
+                  onClick={() => setComoFuncionaOpen(false)}
+                  className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-gold-gradient text-primary-foreground font-medium tracking-wide hover:shadow-[0_0_50px_-5px_var(--gold)] transition-all"
+                >
+                  Solicitar avaliação
+                  <ArrowRight className="h-4 w-4" />
+                </a>
+                <button
+                  type="button"
+                  onClick={() => setComoFuncionaOpen(false)}
+                  className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full border-gold-subtle text-gold hover:bg-gold hover:text-primary-foreground transition-all"
+                >
+                  Fechar
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
