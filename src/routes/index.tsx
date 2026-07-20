@@ -40,8 +40,8 @@ function whatsappLink(mensagem?: string) {
 const nav = [
   { label: "Início", href: "#inicio" },
   { label: "Veículos", href: "#veiculos" },
-  { label: "Sobre", href: "#sobre" },
   { label: "Venda seu veículo", href: "#venda" },
+  { label: "Sobre", href: "#sobre" },
   { label: "Contato", href: "#contato" },
 ];
 
