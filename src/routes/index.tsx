@@ -566,8 +566,8 @@ function Index() {
 
       {/* FOOTER */}
       <footer className="border-t border-gold-subtle bg-surface/60">
-        <div className="mx-auto max-w-[1720px] px-6 md:px-10 lg:px-16 xl:px-24 py-16">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mb-10">
+        <div className="mx-auto max-w-[1720px] px-6 md:px-10 lg:px-16 xl:px-24 py-10 lg:py-14">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 lg:gap-16 items-start">
             <div>
               <div className="flex items-center gap-3 mb-4">
                 <img src={logo} alt="GETCARS" className="h-9 w-9 object-contain" width={36} height={36} loading="lazy" />
@@ -578,23 +578,9 @@ function Index() {
               </p>
             </div>
 
-
-            <div>
-              <p className="text-[10px] tracking-[0.3em] text-gold uppercase mb-6">Navegação</p>
-              <ul className="space-y-3">
-                {nav.map((n) => (
-                  <li key={n.href}>
-                    <a href={n.href} className="text-sm text-muted-foreground hover:text-gold transition-colors">
-                      {n.label}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <div>
-              <p className="text-[10px] tracking-[0.3em] text-gold uppercase mb-6">Contato</p>
-              <ul className="space-y-3 text-sm text-muted-foreground">
+            <div className="md:text-right">
+              <p className="text-[10px] tracking-[0.3em] text-gold uppercase mb-5">Contato</p>
+              <ul className="space-y-2.5 text-sm text-muted-foreground flex flex-col md:items-end">
                 <li>
                   <a href={whatsappLink()} target="_blank" rel="noopener noreferrer" className="hover:text-gold transition-colors inline-flex items-center gap-2">
                     <MessageCircle className="h-4 w-4" /> WhatsApp
@@ -602,7 +588,7 @@ function Index() {
                 </li>
                 <li>
                   <a href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer" className="hover:text-gold transition-colors inline-flex items-center gap-2">
-                    <Instagram className="h-4 w-4" /> @getcars
+                    <Instagram className="h-4 w-4" /> @getcars_
                   </a>
                 </li>
                 <li className="inline-flex items-center gap-2">
@@ -612,7 +598,7 @@ function Index() {
             </div>
           </div>
 
-          <div className="pt-8 border-t border-gold-subtle flex flex-col md:flex-row items-center justify-between gap-4 text-[11px] text-muted-foreground tracking-[0.2em]">
+          <div className="mt-10 lg:mt-12 pt-6 border-t border-gold-subtle/40 flex flex-col md:flex-row items-center justify-between gap-3 text-[11px] text-muted-foreground tracking-[0.18em]">
             <p>© {new Date().getFullYear()} GETCARS · Todos os direitos reservados.</p>
             <p className="uppercase text-gold/70">Qualidade · Procedência · Exclusividade</p>
           </div>
