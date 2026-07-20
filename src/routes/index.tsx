@@ -445,13 +445,13 @@ function Index() {
               Solicitar avaliação
               <ArrowRight className="h-4 w-4" />
             </a>
-            <a
-              href={whatsappLink("Olá, GETCARS! Gostaria de entender como funciona a intermediação de veículos.")}
-              target="_blank" rel="noopener noreferrer"
+            <button
+              type="button"
+              onClick={() => setComoFuncionaOpen(true)}
               className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full border-gold-subtle text-gold hover:bg-gold hover:text-primary-foreground transition-all"
             >
               Entender como funciona
-            </a>
+            </button>
           </div>
         </div>
       </section>
