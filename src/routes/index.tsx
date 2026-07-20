@@ -341,7 +341,7 @@ function Index() {
                     {veiculoDestaque.categoria}
                   </p>
                   <p className="text-[10px] tracking-[0.3em] uppercase text-gold mb-2">Destaque da semana</p>
-                  <h3 className="font-display text-2xl sm:text-3xl lg:text-5xl">{veiculoDestaque.nome}</h3>
+                  <h3 className="font-display text-2xl sm:text-3xl lg:text-5xl lining-nums">{veiculoDestaque.nome}</h3>
                 </div>
               </div>
               <div className="p-8 lg:p-10 flex flex-col lg:flex-row lg:items-center gap-8">
@@ -376,7 +376,7 @@ function Index() {
                   </div>
                   <div className="p-5 sm:p-6 flex flex-col">
                     <p className="text-[10px] tracking-[0.25em] uppercase text-gold/70 mb-2">{v.categoria}</p>
-                    <h3 className="font-display text-xl lg:text-2xl mb-2 leading-tight">{v.nome}</h3>
+                    <h3 className="font-display text-xl lg:text-2xl mb-2 leading-tight lining-nums">{v.nome}</h3>
                     <p className="text-gold-soft text-xs tracking-wide mb-4">Valor mediante consulta</p>
                     <div className="flex flex-wrap gap-4 mb-5 text-xs text-muted-foreground">
                       <div className="flex items-center gap-1.5"><Calendar className="h-3.5 w-3.5 text-gold" />{v.ano}</div>
