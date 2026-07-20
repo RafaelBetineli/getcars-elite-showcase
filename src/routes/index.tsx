@@ -473,7 +473,7 @@ function Index() {
             </a>
             <button
               type="button"
-              onClick={() => setComoFuncionaOpen(true)}
+              onClick={openComoFunciona}
               className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full border-gold-subtle text-gold hover:bg-gold hover:text-primary-foreground transition-all"
             >
               Entender como funciona
