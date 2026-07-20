@@ -141,10 +141,23 @@ function Index() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [comoFuncionaOpen, setComoFuncionaOpen] = useState(false);
+  const [comoFuncionaClosing, setComoFuncionaClosing] = useState(false);
+
+  const openComoFunciona = () => {
+    setComoFuncionaClosing(false);
+    setComoFuncionaOpen(true);
+  };
+  const closeComoFunciona = () => {
+    setComoFuncionaClosing(true);
+    setTimeout(() => {
+      setComoFuncionaOpen(false);
+      setComoFuncionaClosing(false);
+    }, 300);
+  };
 
   useEffect(() => {
-    if (!comoFuncionaOpen) return;
-    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setComoFuncionaOpen(false);
+    if (!comoFuncionaOpen && !comoFuncionaClosing) return;
+    const onKey = (e: KeyboardEvent) => e.key === "Escape" && closeComoFunciona();
     const prev = document.body.style.overflow;
     document.body.style.overflow = "hidden";
     window.addEventListener("keydown", onKey);
@@ -152,7 +165,7 @@ function Index() {
       document.body.style.overflow = prev;
       window.removeEventListener("keydown", onKey);
     };
-  }, [comoFuncionaOpen]);
+  }, [comoFuncionaOpen, comoFuncionaClosing]);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
