@@ -134,3 +134,112 @@
     box-shadow: 0 20px 60px -20px oklch(0.78 0.13 80 / 0.25);
   }
 }
+
+@property --hero-light-x {
+  syntax: "<percentage>";
+  inherits: true;
+  initial-value: 72%;
+}
+
+@property --hero-light-y {
+  syntax: "<percentage>";
+  inherits: true;
+  initial-value: 48%;
+}
+
+.hero-car-illumination {
+  --hero-light-x: 72%;
+  --hero-light-y: 48%;
+  pointer-events: none;
+  mix-blend-mode: screen;
+  opacity: 0.76;
+  transition:
+    --hero-light-x 380ms cubic-bezier(0.16, 1, 0.3, 1),
+    --hero-light-y 380ms cubic-bezier(0.16, 1, 0.3, 1);
+  -webkit-mask-image: radial-gradient(
+    ellipse 32% 42% at var(--hero-light-x) var(--hero-light-y),
+    black 0%,
+    black 24%,
+    rgb(0 0 0 / 68%) 50%,
+    transparent 84%
+  );
+  mask-image: radial-gradient(
+    ellipse 32% 42% at var(--hero-light-x) var(--hero-light-y),
+    black 0%,
+    black 24%,
+    rgb(0 0 0 / 68%) 50%,
+    transparent 84%
+  );
+}
+
+.hero-car-illumination img {
+  filter: brightness(1.55) contrast(1.08) saturate(1.12) sepia(0.06);
+}
+
+.hero-car-illumination::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse 29% 36% at var(--hero-light-x) var(--hero-light-y),
+    rgb(255 226 164 / 20%) 0%,
+    rgb(221 164 72 / 9%) 44%,
+    transparent 80%
+  );
+  filter: blur(16px);
+}
+
+.hero-light-rays {
+  opacity: 0.68;
+  mix-blend-mode: screen;
+  filter: brightness(1.18) saturate(1.04);
+  pointer-events: none;
+  -webkit-mask-image: radial-gradient(
+    ellipse 88% 110% at 58% 12%,
+    black 0%,
+    black 52%,
+    transparent 88%
+  );
+  mask-image: radial-gradient(
+    ellipse 88% 110% at 58% 12%,
+    black 0%,
+    black 52%,
+    transparent 88%
+  );
+}
+
+@media (max-width: 767px) {
+  .hero-car-illumination {
+    --hero-light-x: 76%;
+    --hero-light-y: 56%;
+    opacity: 0.66;
+    -webkit-mask-image: radial-gradient(
+      ellipse 38% 31% at var(--hero-light-x) var(--hero-light-y),
+      black 0%,
+      black 35%,
+      transparent 80%
+    );
+    mask-image: radial-gradient(
+      ellipse 38% 31% at var(--hero-light-x) var(--hero-light-y),
+      black 0%,
+      black 35%,
+      transparent 80%
+    );
+  }
+
+  .hero-light-rays {
+    left: 0;
+    opacity: 0.56;
+    filter: brightness(1.12) saturate(1.03);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-car-illumination {
+    transition: none;
+  }
+
+  .hero-light-rays {
+    opacity: 0.62;
+  }
+}

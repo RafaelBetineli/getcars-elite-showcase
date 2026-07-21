@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import {
   ShieldCheck,
   Sparkles,
@@ -22,6 +22,7 @@ import {
 
 import heroCar from "@/assets/hero-car.jpg";
 import logo from "@/assets/getcars-logo.png";
+import LightRays from "@/components/LightRays";
 import { vehicles, type Vehicle } from "@/data/vehicles";
 
 export const Route = createFileRoute("/")({
@@ -142,6 +143,7 @@ function Index() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [comoFuncionaOpen, setComoFuncionaOpen] = useState(false);
   const [comoFuncionaClosing, setComoFuncionaClosing] = useState(false);
+  const heroLightingRef = useRef<HTMLDivElement>(null);
 
   const openComoFunciona = () => {
     setComoFuncionaClosing(false);
@@ -171,6 +173,49 @@ function Index() {
     const onScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  useEffect(() => {
+    const lightingLayer = heroLightingRef.current;
+    const hero = lightingLayer?.closest("#inicio") as HTMLElement | null;
+    if (!lightingLayer || !hero) return;
+
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    if (reducedMotion.matches) return;
+
+    let frameId: number | null = null;
+    let pointerX = 0;
+    let pointerY = 0;
+
+    const paintLightPosition = () => {
+      const bounds = hero.getBoundingClientRect();
+      const x = Math.min(0.96, Math.max(0.36, (pointerX - bounds.left) / bounds.width));
+      const y = Math.min(0.82, Math.max(0.12, (pointerY - bounds.top) / bounds.height));
+
+      lightingLayer.style.setProperty("--hero-light-x", `${x * 100}%`);
+      lightingLayer.style.setProperty("--hero-light-y", `${y * 100}%`);
+      frameId = null;
+    };
+
+    const handlePointerMove = (event: PointerEvent) => {
+      pointerX = event.clientX;
+      pointerY = event.clientY;
+      if (frameId === null) frameId = requestAnimationFrame(paintLightPosition);
+    };
+
+    const resetLightPosition = () => {
+      lightingLayer.style.setProperty("--hero-light-x", "72%");
+      lightingLayer.style.setProperty("--hero-light-y", "48%");
+    };
+
+    hero.addEventListener("pointermove", handlePointerMove, { passive: true });
+    hero.addEventListener("pointerleave", resetLightPosition);
+
+    return () => {
+      hero.removeEventListener("pointermove", handlePointerMove);
+      hero.removeEventListener("pointerleave", resetLightPosition);
+      if (frameId !== null) cancelAnimationFrame(frameId);
+    };
   }, []);
 
   const veiculoDestaque = vehicles.find((v) => v.destaque) ?? vehicles[0];
@@ -235,9 +280,35 @@ function Index() {
           <div className="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-background/45 lg:via-background/30 lg:to-background/60 max-md:from-background/30 max-md:via-background/5 max-md:to-background/55" />
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_left,oklch(0.08_0.005_60/0.35),transparent_60%)] lg:bg-[radial-gradient(ellipse_at_left,oklch(0.08_0.005_60/0.6),transparent_60%)] max-md:bg-[radial-gradient(ellipse_at_left,oklch(0.08_0.005_60/0.3),transparent_70%)]" />
           <div className="absolute inset-0 bg-gradient-to-b from-background/35 via-transparent to-background/55 lg:from-background/60 lg:to-background/80 max-md:from-background/30 max-md:via-transparent max-md:to-background/10" />
+
+          <div ref={heroLightingRef} className="hero-car-illumination absolute inset-0 z-[1]" aria-hidden="true">
+            <img
+              src={heroCar}
+              alt=""
+              className="h-full w-full object-cover object-[55%_center] lg:object-[75%_center] max-md:object-[82%_70%] max-md:scale-110"
+              width={1920}
+              height={1080}
+            />
+          </div>
+
+          <div className="hero-light-rays absolute inset-y-0 left-[16%] right-0 z-[2]" aria-hidden="true">
+            <LightRays
+              raysOrigin="top-center"
+              raysColor="#e8c98c"
+              raysSpeed={0.4}
+              lightSpread={0.76}
+              rayLength={1.55}
+              fadeDistance={1.2}
+              saturation={0.78}
+              followMouse
+              mouseInfluence={0.14}
+              noiseAmount={0.015}
+              distortion={0.012}
+            />
+          </div>
         </div>
 
-        <div className="relative mx-auto max-w-[1720px] w-full px-6 md:px-10 lg:px-16 xl:px-24 pt-32 pb-24 max-md:pt-14 max-md:pb-8">
+        <div className="relative z-10 mx-auto max-w-[1720px] w-full px-6 md:px-10 lg:px-16 xl:px-24 pt-32 pb-24 max-md:pt-14 max-md:pb-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
             <div className="lg:col-span-6 xl:col-span-5">
               <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full border-gold-subtle mb-10 bg-background/40 backdrop-blur max-md:px-3 max-md:py-1.5 max-md:mb-4 max-md:gap-2">
