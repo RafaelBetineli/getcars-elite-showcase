@@ -21,6 +21,15 @@ import {
 } from "lucide-react";
 
 import heroCar from "@/assets/hero-car.jpg";
+import heroCar1280Avif from "@/assets/hero-car-1280.avif";
+import heroCar1920Avif from "@/assets/hero-car-1920.avif";
+import heroCar2560Avif from "@/assets/hero-car-2560.avif";
+import heroCar1280Webp from "@/assets/hero-car-1280.webp";
+import heroCar1920Webp from "@/assets/hero-car-1920.webp";
+import heroCar2560Webp from "@/assets/hero-car-2560.webp";
+import heroCarMobileAvif from "@/assets/hero-car-mobile.avif";
+import heroCarMobileWebp from "@/assets/hero-car-mobile.webp";
+import heroCarMobileJpg from "@/assets/hero-car-mobile.jpg";
 import logo from "@/assets/getcars-logo.png";
 import LightRays from "@/components/LightRays";
 import { vehicles, type Vehicle } from "@/data/vehicles";
@@ -32,6 +41,8 @@ export const Route = createFileRoute("/")({
 const WHATSAPP_NUMBER = "5511997292805";
 const INSTAGRAM_URL = "https://instagram.com/getcars_/";
 const BADGE = "Revenda Especializada em Veículos Premium";
+const HERO_CAR_AVIF_SRCSET = `${heroCar1280Avif} 1280w, ${heroCar1920Avif} 1920w, ${heroCar2560Avif} 2560w`;
+const HERO_CAR_WEBP_SRCSET = `${heroCar1280Webp} 1280w, ${heroCar1920Webp} 1920w, ${heroCar2560Webp} 2560w`;
 
 function whatsappLink(mensagem?: string) {
   const base = `https://wa.me/${WHATSAPP_NUMBER}`;
@@ -117,6 +128,40 @@ const pilares = [
   },
 ];
 
+function HeroCarPicture({
+  alt,
+  className,
+  loading = "eager",
+  fetchPriority = "auto",
+  sizes = "100vw",
+}: {
+  alt: string;
+  className: string;
+  loading?: "eager" | "lazy";
+  fetchPriority?: "high" | "low" | "auto";
+  sizes?: string;
+}) {
+  return (
+    <picture className="block h-full w-full">
+      <source media="(max-width: 767px)" type="image/avif" srcSet={heroCarMobileAvif} />
+      <source media="(max-width: 767px)" type="image/webp" srcSet={heroCarMobileWebp} />
+      <source media="(max-width: 767px)" srcSet={heroCarMobileJpg} />
+      <source type="image/avif" srcSet={HERO_CAR_AVIF_SRCSET} sizes={sizes} />
+      <source type="image/webp" srcSet={HERO_CAR_WEBP_SRCSET} sizes={sizes} />
+      <img
+        src={heroCar}
+        alt={alt}
+        className={className}
+        width={2560}
+        height={1440}
+        loading={loading}
+        fetchPriority={fetchPriority}
+        decoding="async"
+      />
+    </picture>
+  );
+}
+
 function StatusBadge({ vehicle, size = "md" }: { vehicle: Vehicle; size?: "sm" | "md" }) {
   const Icon = vehicle.statusType === "armored" ? Shield : BadgeCheck;
   const isSm = size === "sm";
@@ -190,7 +235,7 @@ function Index() {
     const paintLightPosition = () => {
       const bounds = hero.getBoundingClientRect();
       const x = Math.min(0.96, Math.max(0.36, (pointerX - bounds.left) / bounds.width));
-      const y = Math.min(0.82, Math.max(0.12, (pointerY - bounds.top) / bounds.height));
+      const y = Math.min(0.62, Math.max(0.12, (pointerY - bounds.top) / bounds.height));
 
       lightingLayer.style.setProperty("--hero-light-x", `${x * 100}%`);
       lightingLayer.style.setProperty("--hero-light-y", `${y * 100}%`);
@@ -267,14 +312,12 @@ function Index() {
       </header>
 
       {/* HERO */}
-      <section id="inicio" className="relative min-h-screen flex items-center overflow-hidden max-md:min-h-svh">
+      <section id="inicio" className="relative min-h-screen flex items-center overflow-hidden max-md:min-h-svh max-md:items-start">
         <div className="absolute inset-0">
-          <img
-            src={heroCar}
+          <HeroCarPicture
             alt="Veículo premium GETCARS"
-            className="h-full w-full object-cover object-[55%_center] lg:object-[75%_center] max-md:object-[82%_70%] max-md:scale-110"
-            width={1920}
-            height={1080}
+            className="h-full w-full object-cover object-[55%_center] lg:object-[75%_center] max-md:object-contain max-md:object-center max-md:scale-100"
+            fetchPriority="high"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-background via-background/60 md:via-background/70 lg:via-background/85 to-transparent max-md:via-background/25" />
           <div className="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-background/45 lg:via-background/30 lg:to-background/60 max-md:from-background/30 max-md:via-background/5 max-md:to-background/55" />
@@ -282,16 +325,14 @@ function Index() {
           <div className="absolute inset-0 bg-gradient-to-b from-background/35 via-transparent to-background/55 lg:from-background/60 lg:to-background/80 max-md:from-background/30 max-md:via-transparent max-md:to-background/10" />
 
           <div ref={heroLightingRef} className="hero-car-illumination absolute inset-0 z-[1]" aria-hidden="true">
-            <img
-              src={heroCar}
+            <HeroCarPicture
               alt=""
-              className="h-full w-full object-cover object-[55%_center] lg:object-[75%_center] max-md:object-[82%_70%] max-md:scale-110"
-              width={1920}
-              height={1080}
+              className="h-full w-full object-cover object-[55%_center] lg:object-[75%_center] max-md:object-contain max-md:object-center max-md:scale-100"
+              fetchPriority="low"
             />
           </div>
 
-          <div className="hero-light-rays absolute inset-y-0 left-[16%] right-0 z-[2]" aria-hidden="true">
+          <div className="hero-light-rays absolute inset-y-0 left-[16%] right-0 z-[2] max-md:hidden" aria-hidden="true">
             <LightRays
               raysOrigin="top-center"
               raysColor="#e8c98c"
@@ -306,9 +347,27 @@ function Index() {
               distortion={0.012}
             />
           </div>
+
+          <div className="hero-mobile-light-rays absolute inset-0 z-[2] md:hidden" aria-hidden="true">
+            <LightRays
+              raysOrigin="top-right"
+              raysColor="#d8b26a"
+              raysSpeed={0.24}
+              lightSpread={0.82}
+              rayLength={1.45}
+              fadeDistance={1.05}
+              saturation={0.66}
+              followMouse={false}
+              mouseInfluence={0}
+              noiseAmount={0.01}
+              distortion={0.008}
+            />
+          </div>
+
+          <div className="hero-floor-shade absolute inset-0 z-[3]" aria-hidden="true" />
         </div>
 
-        <div className="relative z-10 mx-auto max-w-[1720px] w-full px-6 md:px-10 lg:px-16 xl:px-24 pt-32 pb-24 max-md:pt-14 max-md:pb-8">
+        <div className="relative z-10 mx-auto max-w-[1720px] w-full px-6 md:px-10 lg:px-16 xl:px-24 pt-32 pb-24 max-md:pt-48 max-md:pb-10">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
             <div className="lg:col-span-6 xl:col-span-5">
               <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full border-gold-subtle mb-10 bg-background/40 backdrop-blur max-md:px-3 max-md:py-1.5 max-md:mb-4 max-md:gap-2">
@@ -316,7 +375,7 @@ function Index() {
                 <span className="text-[10px] sm:text-xs tracking-[0.3em] text-gold uppercase max-md:tracking-[0.25em]">{BADGE}</span>
               </div>
 
-              <h1 className="font-display text-[2.75rem] sm:text-6xl lg:text-7xl xl:text-[5.5rem] font-medium leading-[1.02] mb-8 tracking-tight max-md:mb-5">
+              <h1 className="font-display text-[2.75rem] sm:text-6xl lg:text-7xl xl:text-[5.5rem] font-medium leading-[1.02] mb-8 tracking-tight max-md:mb-40">
                 Veículos <span className="text-gold-gradient italic">Premium</span>,
                 <br />
                 Exclusivos e <span className="text-gold-gradient italic">Blindados</span>
@@ -366,10 +425,10 @@ function Index() {
                 Cada veículo é tratado com critério, cada negociação com transparência e cada cliente com atendimento personalizado.
               </p>
               <div className="hidden lg:block relative aspect-[3/2] rounded-lg overflow-hidden border-gold-subtle">
-                <img
-                  src={heroCar}
+                <HeroCarPicture
                   alt="Detalhe automotivo premium"
                   loading="lazy"
+                  sizes="(min-width: 1280px) 32vw, (min-width: 1024px) 42vw, 100vw"
                   className="h-full w-full object-cover object-[60%_center] grayscale-[15%]"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-transparent" />

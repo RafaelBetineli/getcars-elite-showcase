@@ -208,29 +208,70 @@
   );
 }
 
+.hero-mobile-light-rays {
+  pointer-events: none;
+  opacity: 0.5;
+  mix-blend-mode: screen;
+  filter: brightness(1.08) saturate(1.02);
+  -webkit-mask-image: linear-gradient(to bottom, black 0%, black 58%, transparent 84%);
+  mask-image: linear-gradient(to bottom, black 0%, black 58%, transparent 84%);
+}
+
+.hero-floor-shade {
+  pointer-events: none;
+  background:
+    radial-gradient(
+      ellipse 38% 25% at 51% 104%,
+      rgb(4 4 3 / 98%) 0%,
+      rgb(6 5 4 / 88%) 40%,
+      rgb(7 6 4 / 52%) 62%,
+      transparent 84%
+    ),
+    linear-gradient(to top, rgb(5 5 4 / 68%) 0%, rgb(6 5 4 / 30%) 15%, transparent 30%);
+}
+
+@media (min-width: 768px) and (max-width: 1600px) {
+  .hero-floor-shade {
+    background:
+      radial-gradient(
+        ellipse 46% 31% at 49% 105%,
+        rgb(3 3 2 / 100%) 0%,
+        rgb(5 5 3 / 94%) 42%,
+        rgb(7 6 4 / 62%) 64%,
+        transparent 85%
+      ),
+      linear-gradient(to top, rgb(4 4 3 / 76%) 0%, rgb(6 5 4 / 38%) 17%, transparent 34%);
+  }
+}
+
 @media (max-width: 767px) {
   .hero-car-illumination {
-    --hero-light-x: 76%;
-    --hero-light-y: 56%;
-    opacity: 0.66;
+    --hero-light-x: 70%;
+    --hero-light-y: 46%;
+    opacity: 0.6;
     -webkit-mask-image: radial-gradient(
-      ellipse 38% 31% at var(--hero-light-x) var(--hero-light-y),
+      ellipse 46% 24% at var(--hero-light-x) var(--hero-light-y),
       black 0%,
-      black 35%,
-      transparent 80%
+      black 30%,
+      transparent 82%
     );
     mask-image: radial-gradient(
-      ellipse 38% 31% at var(--hero-light-x) var(--hero-light-y),
+      ellipse 46% 24% at var(--hero-light-x) var(--hero-light-y),
       black 0%,
-      black 35%,
-      transparent 80%
+      black 30%,
+      transparent 82%
     );
   }
 
-  .hero-light-rays {
-    left: 0;
-    opacity: 0.56;
-    filter: brightness(1.12) saturate(1.03);
+  .hero-floor-shade {
+    background:
+      radial-gradient(
+        ellipse 42% 12% at 50% 52%,
+        rgb(3 3 2 / 90%) 0%,
+        rgb(5 4 3 / 64%) 48%,
+        transparent 84%
+      ),
+      linear-gradient(to top, rgb(4 4 3 / 48%) 0%, transparent 22%);
   }
 }
 
@@ -241,5 +282,9 @@
 
   .hero-light-rays {
     opacity: 0.62;
+  }
+
+  .hero-mobile-light-rays {
+    opacity: 0.42;
   }
 }
